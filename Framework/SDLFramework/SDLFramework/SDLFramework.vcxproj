@@ -100,7 +100,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Config.h" />
-    <ClInclude Include="Drawable.h" />
     <ClInclude Include="FWApplication.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Matrix.h" />
