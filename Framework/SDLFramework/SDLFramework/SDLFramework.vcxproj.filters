@@ -1,37 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
-    <Filter Include="Week1 KMINT">
-      <UniqueIdentifier>{6469432c-2a1e-411f-a745-f6b8fe556dad}</UniqueIdentifier>
-    </Filter>
     <Filter Include="LINAL">
       <UniqueIdentifier>{5842f8f4-5c2a-4b3b-a984-a4439167ae8f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{3dc8acb2-6eb1-41d3-a852-e286495acfa9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FWApplication.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Weiland.cpp">
-      <Filter>Week1 KMINT</Filter>
-    </ClCompile>
-    <ClCompile Include="RandomGenerator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Graph.cpp">
-      <Filter>Week1 KMINT</Filter>
-    </ClCompile>
     <ClCompile Include="Matrix.cpp">
       <Filter>LINAL</Filter>
     </ClCompile>
@@ -48,46 +25,22 @@
       <Filter>LINAL</Filter>
     </ClCompile>
     <ClCompile Include="InputManager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="FWApplication.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="RandomGenerator.cpp">
+      <Filter>Engine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="SDL2.dll" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Config.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FWApplication.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IGameObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Koe.h">
-      <Filter>Week1 KMINT</Filter>
-    </ClInclude>
-    <ClInclude Include="Haas.h">
-      <Filter>Week1 KMINT</Filter>
-    </ClInclude>
-    <ClInclude Include="Weiland.h">
-      <Filter>Week1 KMINT</Filter>
-    </ClInclude>
-    <ClInclude Include="Vertex.h">
-      <Filter>Week1 KMINT</Filter>
-    </ClInclude>
-    <ClInclude Include="Graph.h">
-      <Filter>Week1 KMINT</Filter>
-    </ClInclude>
-    <ClInclude Include="Edge.h">
-      <Filter>Week1 KMINT</Filter>
-    </ClInclude>
-    <ClInclude Include="RandomGenerator.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Drawable.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="Space.h">
       <Filter>LINAL</Filter>
     </ClInclude>
@@ -107,7 +60,19 @@
       <Filter>LINAL</Filter>
     </ClInclude>
     <ClInclude Include="InputManager.h">
-      <Filter>Source Files</Filter>
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="RandomGenerator.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Config.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="FWApplication.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="IGameObject.h">
+      <Filter>Engine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

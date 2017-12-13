@@ -86,7 +86,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="FWApplication.cpp" />
-    <ClCompile Include="Graph.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Matrix.cpp" />
@@ -95,7 +94,6 @@
     <ClCompile Include="Square.cpp" />
     <ClCompile Include="Triangle.cpp" />
     <ClCompile Include="Vector.cpp" />
-    <ClCompile Include="Weiland.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SDL2.dll" />
@@ -103,9 +101,7 @@
   <ItemGroup>
     <ClInclude Include="Config.h" />
     <ClInclude Include="Drawable.h" />
-    <ClInclude Include="Edge.h" />
     <ClInclude Include="FWApplication.h" />
-    <ClInclude Include="Graph.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="RandomGenerator.h" />
@@ -114,11 +110,7 @@
     <ClInclude Include="Square.h" />
     <ClInclude Include="Triangle.h" />
     <ClInclude Include="Vector.h" />
-    <ClInclude Include="Vertex.h" />
-    <ClInclude Include="Haas.h" />
     <ClInclude Include="IGameObject.h" />
-    <ClInclude Include="Koe.h" />
-    <ClInclude Include="Weiland.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

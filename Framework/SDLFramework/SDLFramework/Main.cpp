@@ -5,7 +5,6 @@
 #include <SDL_events.h>
 #include "SDL_timer.h"
 #include <time.h>
-#include "Drawable.h"
 #include "Space.h"
 
 using namespace std;
