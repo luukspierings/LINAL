@@ -70,7 +70,9 @@ Matrix Matrix::translate(Matrix t) {
 			float newV = 0;
 
 			for (int cal = 0; cal < t.values[0].size(); cal++) {
-				newV += (values[Vcolumn][cal] * t.values[cal][Trow]);
+				float v1 = values[Vcolumn][cal];
+				float v2 = t.values[cal][Trow];
+				newV += (v1 * v2);
 			}
 
 			matrix[Vcolumn].push_back(newV);

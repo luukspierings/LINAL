@@ -59,6 +59,7 @@ int main(int args[])
 		
 		space.input(inputManager);
 
+		space.update();
 
 		space.draw(application);
 

@@ -5,6 +5,8 @@
 
 using namespace std;
 
+#define RAD_TO_DEGREE (180.0f / 3.14159265358979323846264338327950288f)
+#define DEGREE_TO_RAD (3.14159265358979323846264338327950288f / 180.0f)
 
 class Vector {
 
@@ -17,48 +19,21 @@ public:
 		
 	}
 
-	float length() {
-		float l;
-		for (float &f : values) {
-			l += (f*f);
-		}
-		return sqrt(l);
-	}
-
-	Matrix getMatrix() {
-		return Matrix({ values }, { 250,0,0,255 });
-	}
-
-	Matrix getDrawableMatrix() {
-		vector<vector<float>> v;
-		v.push_back({});
-		v.push_back({});
-		for (auto z : values) {
-			v[0].push_back(0);
-			v[1].push_back(z);
-		}
-		return Matrix(v, { 250,0,0,255 });
-	}
-
-	Matrix getTranslatableMatrix() {
-
-		vector<vector<float>> v;
-		for (float c = 0; c <= values.size(); c++) {
-			v.push_back({});
-			for (float r = 0; r <= values.size(); r++) {
-				v[c].push_back((c == values.size() && r < values.size())? values[r] : (r == c)? 1 : 0 );
-			}
-		}
-		
-		return Matrix(v, { 250,0,0,255 });
-	}
+	Matrix getMatrix();
+	Matrix getDrawableMatrix(Vector startPos = Vector({ 0,0,0 }));
+	Matrix getTranslatableMatrix();
 	
-	
-	void scale(float scalair) {
-		for (float v = 0; v < values.size(); v++) {
-			values[v] *= scalair;
-		}
-	}
+	void scale(float scalair);
+	Vector negative();
+
+	float in(Vector vec);
+	Vector out(Vector vec);
+
+	float length();
+	float angle(Vector vec);
+
+	bool independent(Vector vec);
+
 
 	Vector Vector::operator+(const Vector & vec)
 	{
@@ -76,24 +51,6 @@ public:
 		}
 		return Vector(v);
 	}
-
-	float in(Vector vec) {
-		float v;
-		for (float i = 0; i < values.size() || i < vec.values.size(); i++) {
-			v += values[i] * vec.values[i];
-		}
-		return v;
-	}
-	Vector out(Vector vec) {
-		vector<float> v;
-		if (values.size() == 3) {
-			v.push_back((values[1] * vec.values[2]) - (values[2] * vec.values[1]));
-			v.push_back((values[2] * vec.values[0]) - (values[0] * vec.values[2]));
-			v.push_back((values[0] * vec.values[1]) - (values[1] * vec.values[0]));
-		}
-		return Vector{v};
-	}
-
 
 private:
 

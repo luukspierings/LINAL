@@ -11,7 +11,7 @@ using namespace std;
 class Spaceship {
 
 public:
-	Spaceship(Vector position = Vector({ 0,0,0 }), int size = 200);
+	Spaceship(Vector position = Vector({ 0,0,0 }), int size = 20);
 
 	void accelerate();
 	
@@ -24,12 +24,16 @@ public:
 	void moveUp();
 	void moveDown();
 
-
 	void shoot();
 
 	void input(InputManager& inputM);
 
+	void update();
+
 	Matrix getDrawable() const;
+	Vector getDrawableDirection() const;
+
+	bool isCrosshairVisible() const;
 
 private:
 
@@ -37,8 +41,12 @@ private:
 	Square aabb;
 
 	float turnDegrees = 2.f;
-	float velocity;
+	float velocity = 2.f;
+	float minVelocity = 2.f;
+	float maxVelocity = 5.f;
 
+	Vector direction;
+	bool crosshairVisible = true;
 
 
 };

@@ -35,8 +35,25 @@ public:
 	Spaceship spaceship;
 
 
-
 	Space() {
+
+		Vector v1({ 0,0,10 });
+		Vector v2({ 10,0,0 });
+		Vector vOut = v1.out(v2);
+
+		Vector vNegative({-10,0,0});
+
+		//vectors.push_back(v1);
+		//vectors.push_back(v2);
+		//vectors.push_back(vOut);
+		//vectors.push_back(vNegative);
+
+		float a1 = vOut.angle(v1);
+		float a2 = vOut.angle(v2);
+		float a = v1.angle(v2);
+
+		bool independantV1V2 = v1.independent(v2);
+		bool independantV2VNegative = v2.independent(vNegative);
 
 
 	}
@@ -47,6 +64,13 @@ public:
 		spaceship.input(inputM);
 
 	}
+
+	void update() {
+
+		spaceship.update();
+
+	}
+
 
 	void draw(FWApplication* app) 
 	{
@@ -69,6 +93,7 @@ public:
 		}
 
 		(spaceship.getDrawable() * zoomM).draw(app);
+		if(spaceship.isCrosshairVisible())((spaceship.getDrawableDirection().getDrawableMatrix(spaceship.getDrawable().values[5]))*zoomM).draw(app);
 
 	}
 
