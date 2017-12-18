@@ -10,7 +10,7 @@ using namespace std;
 class Square: public Matrix {
 
 public:
-	Square(Vector position = Vector({0,0,0}), int size = 100);
+	Square(Vector position = Vector({0,0,0}), float size = 100.f);
 
 
 

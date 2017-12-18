@@ -25,6 +25,7 @@ public:
 	
 	void scale(float scalair);
 	Vector negative();
+	Vector normalize();
 
 	float in(Vector vec);
 	Vector out(Vector vec);

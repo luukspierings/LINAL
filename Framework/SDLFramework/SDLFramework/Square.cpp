@@ -1,6 +1,6 @@
 #include "Square.h"
 
-Square::Square(Vector position, int size)
+Square::Square(Vector position, float size)
 {
 
 	if (position.values.size() < 3) return;
@@ -43,6 +43,6 @@ Square::Square(Vector position, int size)
 
 
 	//test
-	addEdge(0, 6);
+	//addEdge(0, 6);
 
 }

@@ -3,8 +3,10 @@
 #include "Vector.h"
 #include "Matrix.h"
 #include "Square.h"
+#include "Line.h"
 #include "Triangle.h"
 #include "Spaceship.h"
+#include "Camera.h"
 
 #include <math.h>  
 #include <vector>
@@ -28,11 +30,14 @@ public:
 
 	float rotationrate = 5.f;
 
-	float gridW = 1000;
-	float gridH = 1000;
+	float gridW = 1;
+	float gridH = 1;
 	float gridSize = 10;
 
 	Spaceship spaceship;
+
+
+	Camera camera{ 900,900 };
 
 
 	Space() {
@@ -56,6 +61,22 @@ public:
 		bool independantV2VNegative = v2.independent(vNegative);
 
 
+		float sW = 1.f;
+
+		matrixes.push_back(Square(Vector({ -2 * sW,sW,0 }), sW));
+		matrixes.push_back(Square(Vector({ sW,sW,0 }), sW));
+		matrixes.push_back(Square(Vector({ sW,-2*sW,0 }), sW));
+		matrixes.push_back(Square(Vector({ -2*sW,-2*sW,0 }), sW));
+		
+
+		//matrixes.push_back(Square(Vector({ 200,-200,0 })));
+		//matrixes.push_back(Square(Vector({ 200,200,0 })));
+		//matrixes.push_back(Square(Vector({ -200,200,0 })));
+
+		matrixes.push_back(Line(Vector({ -gridW,0,0 }), Vector({ gridW,0,0 })));
+		matrixes.push_back(Line(Vector({ 0,-gridH,0 }), Vector({ 0,gridH,0 })));
+
+		
 	}
 
 
@@ -63,37 +84,80 @@ public:
 
 		spaceship.input(inputM);
 
+		if (inputM.isKeyDown("A")) matrixes[0] = matrixes[0].rotate(2.f, 'y');
+		if (inputM.isKeyDown("D")) matrixes[0] = matrixes[0].rotate(-2.f, 'y');
+		if (inputM.isKeyDown("S")) matrixes[0] = matrixes[0].rotate(-2.f, 'x');
+		if (inputM.isKeyDown("W")) matrixes[0] = matrixes[0].rotate(2.f, 'x');
+
+		if (inputM.isKeyDown("Up")) camera.moveCamera(Vector({ 0,0,0.1f,0 }));
+		if (inputM.isKeyDown("Down")) camera.moveCamera(Vector({ 0,0,-0.1f,0 }));
+		if (inputM.isKeyDown("Left")) camera.moveCamera(Vector({ -0.1f,0,0,0 }));
+		if (inputM.isKeyDown("Right")) camera.moveCamera(Vector({ 0.1f,0,0,0 }));
+
+
 	}
 
 	void update() {
 
-		spaceship.update();
+		//spaceship.update();
 
 	}
 
 
 	void draw(FWApplication* app) 
 	{
-
 		app->SetColor({ 255,255,255,255 });
 		app->DrawRect(0,0,app->getW(),app->getH(),true);
 
+
+		//Vector back(spaceship.getDrawable().values[6]);
+		//Vector front(spaceship.getDrawable().values[5]);
+
+
+		//Vector eye({back.values[0],back.values[1], back.values[2] ,1});
+		//Vector lookAt({ front.values[0],front.values[1], front.values[2] ,1 });
+
+		
+
+		float wW = app->getW();
+		float wH = app->getH();
 		float offsetX = static_cast<float>(app->getW() / 2);
 		float offsetY = static_cast<float>(app->getH() / 2);
 
-		Matrix zoomM({ 
+
+
+		/*Matrix zoomM({ 
 			{ zoom,0,0,1 },
 			{ 0,-zoom,0,1 },
 			{ 0, 0,1,1 },
 			{ offsetX,offsetY,0,1 } 
-		});
+		});*/
+
 
 		for each(Vector v in vectors){
-			((v.getDrawableMatrix())*zoomM).draw(app);
+
+			/*Matrix newM((v.getDrawableMatrix()).x(camera));
+
+			newM.draw(app);*/
 		}
 
-		(spaceship.getDrawable() * zoomM).draw(app);
-		if(spaceship.isCrosshairVisible())((spaceship.getDrawableDirection().getDrawableMatrix(spaceship.getDrawable().values[5]))*zoomM).draw(app);
+		for each(Matrix m in matrixes) {
+			camera.toDraw(m).draw(app);
+		}
+
+/*
+		(spaceship.getDrawable().x(camera) ).draw(app);
+		if (spaceship.isCrosshairVisible()) {
+
+			Vector direction = spaceship.getDrawableDirection();
+			Vector frontV = spaceship.getDrawable().values[5];
+			Matrix directionM = direction.getDrawableMatrix(frontV);
+
+			Matrix directionZoomed = directionM.x( camera) ;
+
+			directionZoomed.draw(app);
+
+		}*/
 
 	}
 

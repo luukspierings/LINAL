@@ -52,16 +52,27 @@ Vector Vector::negative() {
 	return *this;
 }
 
+Vector Vector::normalize()
+{
+	vector<float> v;
+	float l = length();
+	for (auto n : values) {
+		if(l != 0.f) v.push_back(n/l);
+		else v.push_back(0.f);
+	}
+	return Vector(v);
+}
+
 float Vector::in(Vector vec) {
 	float v = 0.f;
-	for (float i = 0; i < values.size() || i < vec.values.size(); i++) {
+	for (float i = 0; i < values.size() && i < vec.values.size(); i++) {
 		v += values[i] * vec.values[i];
 	}
 	return v;
 }
 Vector Vector::out(Vector vec) {
 	vector<float> v;
-	if (values.size() == 3) {
+	if (values.size() >= 3) {
 		v.push_back((values[1] * vec.values[2]) - (values[2] * vec.values[1]));
 		v.push_back((values[2] * vec.values[0]) - (values[0] * vec.values[2]));
 		v.push_back((values[0] * vec.values[1]) - (values[1] * vec.values[0]));

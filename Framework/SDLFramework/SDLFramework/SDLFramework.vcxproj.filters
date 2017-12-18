@@ -36,6 +36,12 @@
     <ClCompile Include="RandomGenerator.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>LINAL</Filter>
+    </ClCompile>
+    <ClCompile Include="Line.cpp">
+      <Filter>LINAL</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="SDL2.dll" />
@@ -73,6 +79,12 @@
     </ClInclude>
     <ClInclude Include="IGameObject.h">
       <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>LINAL</Filter>
+    </ClInclude>
+    <ClInclude Include="Line.h">
+      <Filter>LINAL</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
