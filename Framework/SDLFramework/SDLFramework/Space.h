@@ -63,9 +63,9 @@ public:
 
 		float sW = 1.f;
 
-		matrixes.push_back(Square(Vector({ -2 * sW,sW,0 }), sW));
+		matrixes.push_back(Square(Vector({ -2 * sW,sW,-sW }), sW));
 		matrixes.push_back(Square(Vector({ sW,sW,0 }), sW));
-		matrixes.push_back(Square(Vector({ sW,-2*sW,0 }), sW));
+		matrixes.push_back(Square(Vector({ sW,-2*sW,sW }), sW));
 		matrixes.push_back(Square(Vector({ -2*sW,-2*sW,0 }), sW));
 		
 

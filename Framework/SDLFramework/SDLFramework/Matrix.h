@@ -38,7 +38,7 @@ public:
 	void addEdge(int v1, int v2);
 
 
-	Matrix x(Matrix trans);
+	Matrix x(const Matrix & trans);
 	Matrix translate(Matrix t = Matrix());
 
 

@@ -74,11 +74,11 @@ Matrix Matrix::operator*(const Matrix & trans)
 	return Matrix(matrix, color, edges);
 }
 
-Matrix Matrix::x(Matrix trans) {
+Matrix Matrix::x(const Matrix & trans) {
 	vector<vector<float>> matrix = values;
 	if (matrix[0].size() > trans.values.size()) {
 		for (int Vcolumn = 0; Vcolumn < matrix.size(); Vcolumn++) {
-			matrix[Vcolumn].push_back(1);
+			matrix[Vcolumn].push_back(1.f);
 		}
 
 		matrix = Matrix(matrix).translate(trans).values;
@@ -91,7 +91,7 @@ Matrix Matrix::x(Matrix trans) {
 	}
 	else if (matrix[0].size() < trans.values.size()) {
 		for (int Vcolumn = 0; Vcolumn < matrix.size(); Vcolumn++) {
-			matrix[Vcolumn].push_back(1);
+			matrix[Vcolumn].push_back(1.f);
 		}
 
 		matrix = Matrix(matrix).translate(trans).values;
@@ -117,7 +117,7 @@ Matrix Matrix::translate(Matrix t) {
 			for (int cal = 0; cal < t.values[0].size(); cal++) {
 				float v1 = values[Vcolumn][cal];
 				float v2 = t.values[cal][Trow];
-				if(v1 != 0.f && v2 != 0.f) newV += (v1 * v2);
+				if((v1+0.0) != 0.f && (v2+0.0) != 0.f) newV += (v1 * v2);
 			}
 
 			matrix[Vcolumn].push_back(newV);

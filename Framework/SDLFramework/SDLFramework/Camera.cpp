@@ -8,13 +8,13 @@ Camera::Camera(float pWW, float pWH)
 	wW = pWW;
 	wH = pWH;
 
-	eye = Vector({ 0,0,-10,1 });
-	lookAt = Vector({ 0,0,0,1 });
+	eye = Vector({ 0,0,0,1 });
+	lookAt = Vector({ 0,0,1,1 });
 	up = Vector({ 0,-1,0,1 });
 
 	near = 1.f;
-	fov = 70.f;
-	far = 10.f;
+	fov = 110.f;
+	far = 20.f;
 
 	calculate();
 }
@@ -51,7 +51,7 @@ void Camera::calculate()
 		{ 0,0,0,1 }
 	});
 
-
+	float pi = PI;
 	float scale = near * tan(((PI / 180) * fov) / 2);
 
 	float value1 = ((far * -1) / (far - near));
@@ -70,8 +70,10 @@ Matrix Camera::toDraw(Matrix m)
 {
 	Matrix view{ m };
 
-	view = camera.x(projection);
+	// translate projection over camera
+	view = projection.x(camera);
 
+	// translate view over real points
 	view = m.x(view);
 
 
@@ -86,7 +88,7 @@ Matrix Camera::toDraw(Matrix m)
 		else {
 			view.values[Vcolumn][0] = (wW / 2) + (((view.values[Vcolumn][0] + 1.f) / w) * (wW * 0.5f));
 			view.values[Vcolumn][1] = (wH / 2) + (((view.values[Vcolumn][1] + 1.f) / w) * (wH * 0.5f));
-			view.values[Vcolumn][2] = (view.values[Vcolumn][2] * -1.f);
+			if(view.values[Vcolumn][2] != 0.f) view.values[Vcolumn][2] = (view.values[Vcolumn][2] * -1.f);
 		}
 	}
 
