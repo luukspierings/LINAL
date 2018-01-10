@@ -1,7 +1,5 @@
 #include "Matrix.h"
 
-#include "Vector.h"
-
 
 void Matrix::draw(FWApplication* app) {
 
@@ -153,9 +151,31 @@ Vector Matrix::middleTranslation() {
 }
 
 
-Matrix Matrix::rotate(float degrees, char direction) {
+Matrix Matrix::rotate(float degrees, Vector rotationAxis, Vector rotationPoint) {
 
-	Vector middle = middlePoint();
+	degrees *= DEGREE_TO_RAD;
+
+	float rX = rotationAxis.values[0];
+	float rY = rotationAxis.values[1];
+	float rZ = rotationAxis.values[2];
+
+	float T1 = atan2(rZ, rX);
+	float T2 = atan2(rY, sqrt((rX * rX) + (rZ * rZ)));
+
+	Matrix m7 = Matrix({ { 1,0,0,0 },{ 0,1,0,0 },{ 0,0,1,0 },{ rotationPoint.values[0], rotationPoint.values[1], rotationPoint.values[2], 1 } });
+	Matrix m6 = Matrix({ { cos(T1),0,sin(T1),0 },{ 0,1,0,0 },{ -sin(T1),0,cos(T1),0 },{ 0,0,0,1 } });
+	Matrix m5 = Matrix({ { cos(T2), sin(T2),0,0 },{ -sin(T2),cos(T2),0,0 },{ 0,0,1,0 },{ 0,0,0,1 } });
+	Matrix m4 = Matrix({ { 1,0,0,0 },{ 0,cos(degrees),sin(degrees),0 },{ 0,-sin(degrees),cos(degrees),0 },{ 0,0,0,1 } });
+	Matrix m3 = Matrix({ { cos(T2),-sin(T2),0,0 },{ sin(T2),cos(T2),0,0 },{ 0,0,1,0 },{ 0,0,0,1 } });
+	Matrix m2 = Matrix({ { cos(T1),0,-sin(T1),0 },{ 0,1,0,0 },{ sin(T1),0,cos(T1),0 },{ 0,0,0,1 } });
+	Matrix m1 = Matrix({ { 1,0,0,0 },{ 0,1,0,0 },{ 0,0,1,0 },{ 0 - rotationPoint.values[0], 0 - rotationPoint.values[1], 0 - rotationPoint.values[2], 1 } });
+
+
+	Matrix m(*this);
+
+	m = m * m1 * m2 * m3 * m4 * m5 * m6 * m7;
+
+	/*Vector middle = middlePoint();
 
 	degrees *= DEGREE_TO_RAD;
 
@@ -180,7 +200,7 @@ Matrix Matrix::rotate(float degrees, char direction) {
 	m = m * r;
 
 	middle.scale(-1.f);
-	m = m * middle.getTranslatableMatrix();
+	m = m * middle.getTranslatableMatrix();*/
 
 	return m;
 }

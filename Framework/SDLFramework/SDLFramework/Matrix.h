@@ -1,6 +1,7 @@
 #pragma once
 
 #include "FWApplication.h"
+#include "Vector.h"
 
 #include <math.h>  
 #include <vector>
@@ -10,7 +11,6 @@
 
 using namespace std;
 
-class Vector;
 class Matrix {
 
 public:
@@ -46,7 +46,7 @@ public:
 	Vector middleTranslation();
 
 
-	Matrix rotate(float degrees, char direction = 'z');
+	Matrix rotate(float degrees, Vector rotationAxis, Vector rotationPoint = Vector({0,0,0}));
 
 	Matrix Matrix::operator*(const Matrix & trans);
 

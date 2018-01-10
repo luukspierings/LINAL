@@ -1,13 +1,15 @@
 #pragma once
 
+
 #include <math.h>  
-#include "Matrix.h"
+#include <vector>
 
 using namespace std;
 
 #define RAD_TO_DEGREE (180.0f / 3.14159265358979323846264338327950288f)
 #define DEGREE_TO_RAD (3.14159265358979323846264338327950288f / 180.0f)
 
+class Matrix;
 class Vector {
 
 public:

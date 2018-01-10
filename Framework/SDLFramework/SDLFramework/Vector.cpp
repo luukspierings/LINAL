@@ -1,5 +1,6 @@
 #include "Vector.h"
 
+#include "Matrix.h"
 
 
 float Vector::length() {

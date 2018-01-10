@@ -23,6 +23,10 @@ Square::Square(Vector position, float size)
 	addValue({ xS,yS,zS });
 	addValue({ xS,y,zS });
 
+	// back middle
+	addValue({ x + (size / 2),y+(size/2),z });
+
+
 	// front lines
 	addEdge(0, 1);
 	addEdge(1, 2);

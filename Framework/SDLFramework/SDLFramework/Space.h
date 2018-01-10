@@ -7,6 +7,7 @@
 #include "Triangle.h"
 #include "Spaceship.h"
 #include "Camera.h"
+#include "Bullet.h"
 
 #include <math.h>  
 #include <vector>
@@ -20,19 +21,13 @@ class Space {
 
 public:
 
+	float gridW = 1;
+	float gridH = 1;
 
-	vector<Vector> vectors;
 
 	vector<Matrix> matrixes;
 
-	float zoom = 1;
-	float zoomrate = 1.1f;
-
-	float rotationrate = 5.f;
-
-	float gridW = 1;
-	float gridH = 1;
-	float gridSize = 10;
+	vector<Bullet> bullets;
 
 	Spaceship spaceship;
 
@@ -46,7 +41,7 @@ public:
 		Vector v2({ 10,0,0 });
 		Vector vOut = v1.out(v2);
 
-		Vector vNegative({-10,0,0});
+		Vector vNegative({ -10,0,0 });
 
 		//vectors.push_back(v1);
 		//vectors.push_back(v2);
@@ -61,115 +56,125 @@ public:
 		bool independantV2VNegative = v2.independent(vNegative);
 
 
-		float sW = 1.f;
+		float sW = 5.f;
 
-		matrixes.push_back(Square(Vector({ -2 * sW,sW,-sW }), sW));
+		matrixes.push_back(Square(Vector({ -2 * sW,sW,sW }), sW));
 		matrixes.push_back(Square(Vector({ sW,sW,0 }), sW));
 		matrixes.push_back(Square(Vector({ sW,-2*sW,sW }), sW));
 		matrixes.push_back(Square(Vector({ -2*sW,-2*sW,0 }), sW));
-		
 
-		//matrixes.push_back(Square(Vector({ 200,-200,0 })));
+
+		matrixes.push_back(Square(Vector({ 0,0,0 }), sW));
 		//matrixes.push_back(Square(Vector({ 200,200,0 })));
 		//matrixes.push_back(Square(Vector({ -200,200,0 })));
 
 		matrixes.push_back(Line(Vector({ -gridW,0,0 }), Vector({ gridW,0,0 })));
 		matrixes.push_back(Line(Vector({ 0,-gridH,0 }), Vector({ 0,gridH,0 })));
 
-		
+
 	}
 
 
 	void input(InputManager& inputM) {
 
-		spaceship.input(inputM);
-
-		if (inputM.isKeyDown("A")) matrixes[0] = matrixes[0].rotate(2.f, 'y');
-		if (inputM.isKeyDown("D")) matrixes[0] = matrixes[0].rotate(-2.f, 'y');
-		if (inputM.isKeyDown("S")) matrixes[0] = matrixes[0].rotate(-2.f, 'x');
-		if (inputM.isKeyDown("W")) matrixes[0] = matrixes[0].rotate(2.f, 'x');
-
-		if (inputM.isKeyDown("Up")) camera.moveCamera(Vector({ 0,0,0.1f,0 }));
-		if (inputM.isKeyDown("Down")) camera.moveCamera(Vector({ 0,0,-0.1f,0 }));
-		if (inputM.isKeyDown("Left")) camera.moveCamera(Vector({ -0.1f,0,0,0 }));
-		if (inputM.isKeyDown("Right")) camera.moveCamera(Vector({ 0.1f,0,0,0 }));
-
+		spaceship.input(inputM, *this);
 
 	}
 
 	void update() {
 
-		//spaceship.update();
+		spaceship.update();
+
+		for (auto& b : bullets) {
+			b.update();
+		}
+
+		for (auto it = bullets.begin(); it != bullets.end();)
+		{
+			if (!it->alive()) it = bullets.erase(it);
+			else ++it;
+		}
 
 	}
 
+	void addBullet() {
 
-	void draw(FWApplication* app) 
+		Vector pos{};
+		Vector dir{};
+
+		pos = spaceship.frontMiddle();
+		dir = spaceship.getDrawableDirection().normalize();
+
+		bullets.push_back(Bullet{pos,dir});
+
+	}
+
+	void draw(FWApplication* app)
 	{
 		app->SetColor({ 255,255,255,255 });
-		app->DrawRect(0,0,app->getW(),app->getH(),true);
+		app->DrawRect(0, 0, app->getW(), app->getH(), true);
 
 
-		//Vector back(spaceship.getDrawable().values[6]);
-		//Vector front(spaceship.getDrawable().values[5]);
+		Vector back = spaceship.backMiddle();
+		//back = back + Vector({ 0.7f,0,0 });
+
+		Vector front = spaceship.frontMiddle();
+		Vector left = spaceship.backLeft();
+		Vector right = spaceship.backRight();
+		Vector down = spaceship.backDown();
 
 
-		//Vector eye({back.values[0],back.values[1], back.values[2] ,1});
-		//Vector lookAt({ front.values[0],front.values[1], front.values[2] ,1 });
+		Vector up = (back - front).out(left - right);
+		up = up.normalize();
+		camera.setUp(up);
 
+
+		Vector birdsEye = (down - back).out((back - right));
+		birdsEye.scale(1.f/2.f);
 		
+		up = (left - right).out(back - front);
+
+		up.scale(1.f/5.f);
+
+		birdsEye = back + (birdsEye + up);
+
+		camera.setLookat(back);
+		camera.setEye(birdsEye);
+
+
 
 		float wW = app->getW();
 		float wH = app->getH();
-		float offsetX = static_cast<float>(app->getW() / 2);
-		float offsetY = static_cast<float>(app->getH() / 2);
-
-
-
-		/*Matrix zoomM({ 
-			{ zoom,0,0,1 },
-			{ 0,-zoom,0,1 },
-			{ 0, 0,1,1 },
-			{ offsetX,offsetY,0,1 } 
-		});*/
-
-
-		for each(Vector v in vectors){
-
-			/*Matrix newM((v.getDrawableMatrix()).x(camera));
-
-			newM.draw(app);*/
-		}
 
 		for each(Matrix m in matrixes) {
 			camera.toDraw(m).draw(app);
 		}
+		for (auto& b : bullets) {
+			camera.toDraw(b.getDrawable()).draw(app);
+		}
 
-/*
-		(spaceship.getDrawable().x(camera) ).draw(app);
+
+		camera.toDraw(spaceship.getDrawable()).draw(app);
+
 		if (spaceship.isCrosshairVisible()) {
 
 			Vector direction = spaceship.getDrawableDirection();
-			Vector frontV = spaceship.getDrawable().values[5];
+			Vector frontV = spaceship.frontMiddle();
 			Matrix directionM = direction.getDrawableMatrix(frontV);
 
-			Matrix directionZoomed = directionM.x( camera) ;
+			camera.toDraw(directionM).draw(app);
 
-			directionZoomed.draw(app);
-
-		}*/
+		}
 
 	}
 
 	void scrollDown(FWApplication* app) {
-		if (app->getW() / (zoom/zoomrate) < 2*gridW) {
-			zoom /= zoomrate;
-		}
+		
 	}
 	void scrollUp(FWApplication* app) {
-		zoom *= zoomrate;
-	}
 	
+	}
+
 
 
 private:

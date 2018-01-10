@@ -10,9 +10,9 @@ Camera::Camera(float pWW, float pWH)
 
 	eye = Vector({ 0,0,0,1 });
 	lookAt = Vector({ 0,0,1,1 });
-	up = Vector({ 0,-1,0,1 });
+	up = Vector({ 0,1,0,1 });
 
-	near = 1.f;
+	near = 10.f;
 	fov = 110.f;
 	far = 20.f;
 
@@ -20,10 +20,25 @@ Camera::Camera(float pWW, float pWH)
 }
 
 
-void Camera::moveCamera(Vector v)
+void Camera::setEye(Vector v)
 {
-	eye = eye + v;
-	lookAt = eye + Vector({0,0,1,0});
+	eye = Vector({ v.values[0],v.values[1],v.values[2], 1 });
+
+	calculate();
+}
+
+void Camera::setLookat(Vector v)
+{
+	lookAt = Vector({ v.values[0],v.values[1],v.values[2], 1 });
+
+	calculate();
+}
+
+void Camera::setUp(Vector v) {
+
+	v = v.normalize();
+
+	up = Vector({ v.values[0], v.values[1], v.values[2], 1});
 
 	calculate();
 }
@@ -44,25 +59,39 @@ void Camera::calculate()
 	if (ycam != 0.f) ycam *= -1;
 	if (zcam != 0.f) zcam *= -1;
 
-	camera = Matrix({
+	/*camera = Matrix({
 		{ x.values[0], x.values[1], x.values[2], xcam },
 		{ y.values[0], y.values[1], y.values[2], ycam },
 		{ z.values[0], z.values[1], z.values[2], zcam },
 		{ 0,0,0,1 }
+	});*/
+
+	camera = Matrix({
+		{ x.values[0], y.values[0], z.values[0], 0 },
+		{ x.values[1], y.values[1], z.values[1], 0 },
+		{ x.values[2], y.values[2], z.values[2], 0 },
+		{ xcam,ycam,zcam,1 }
 	});
 
-	float pi = PI;
 	float scale = near * tan(((PI / 180) * fov) / 2);
 
 	float value1 = ((far * -1) / (far - near));
 	float value2 = ((far * -1 * near) / (far - near));
 
-	projection = Matrix({
+	/*projection = Matrix({
 		{ scale, 0, 0, 0 },
 		{ 0, scale, 0, 0 },
 		{ 0, 0, value1, -1 },
 		{ 0, 0, value2, 0 }
+	});*/
+
+	projection = Matrix({
+		{ scale, 0, 0, 0 },
+		{ 0, scale, 0, 0 },
+		{ 0, 0, value1, value2 },
+		{ 0, 0, -1, 0 }
 	});
+
 }
 
 
@@ -70,11 +99,14 @@ Matrix Camera::toDraw(Matrix m)
 {
 	Matrix view{ m };
 
-	// translate projection over camera
-	view = projection.x(camera);
+	//// translate projection over camera
+	//view = projection.x(camera);
 
-	// translate view over real points
-	view = m.x(view);
+	//// translate view over real points
+	//view = m.x(view);
+
+	view = m.x(camera);
+	view = view.x(projection);
 
 
 	//// naberekening

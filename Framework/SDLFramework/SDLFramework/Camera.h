@@ -17,7 +17,9 @@ public:
 	Matrix toDraw(Matrix m);
 
 
-	void moveCamera(Vector v);
+	void setLookat(Vector v);
+	void setEye(Vector v);
+	void setUp(Vector v);
 
 	void calculate();
 
