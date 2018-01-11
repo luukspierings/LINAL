@@ -30,7 +30,7 @@ public:
 
 	void addValue(vector<float> value);
 
-	int dimension() { return (values.size() > 0) ? values[0].size() : 0; }
+	int dimension() const { return (values.size() > 0) ? values[0].size() : 0; }
 	void addRow(float v = 1.f);
 	void addRow(Vector v);
 	void removeRow();

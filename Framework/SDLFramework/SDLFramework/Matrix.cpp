@@ -7,38 +7,12 @@ void Matrix::draw(FWApplication* app) {
 
 	app->SetColor(color);
 
-	/*float lastX = values.back()[0];
-	float lastY = values.back()[1];
-
-	for (auto v : values)
-	{
-		app->DrawLine(lastX, lastY, v[0], v[1]);
-
-		lastX = v[0];
-		lastY = v[1];
-	}*/
-
-	float pointW = 3.f;
-
-	for (auto v : values) {
-
-		if (v[0] < 0.f || v[1] < 0.f) continue;
-
-		/*app->DrawLine(v[0], v[1], v[0] + pointW, v[1]);
-		app->DrawLine(v[0], v[1], v[0], v[1] + pointW);
-		app->DrawLine(v[0] + pointW, v[1] + pointW, v[0] + pointW, v[1]);
-		app->DrawLine(v[0] + pointW, v[1] + pointW, v[0], v[1] + pointW);*/
-
-	}
-
-
 	for (auto e : edges)
 	{
 		if (values[e.first][0] < 0.f || values[e.first][1] < 0.f || values[e.second][0] < 0.f || values[e.second][1] < 0.f) continue;
 
 		app->DrawLine(values[e.first][0], values[e.first][1], values[e.second][0], values[e.second][1]);
 	}
-
 
 }
 
@@ -125,26 +99,25 @@ Matrix Matrix::x(const Matrix & trans) {
 }
 
 Matrix Matrix::translate(Matrix t) {
-
-	vector<vector<float>> matrix;
+	Matrix matrix { t };
+	matrix.values.clear();
 
 	for (int Vcolumn = 0; Vcolumn < values.size(); Vcolumn++)
 	{
-		matrix.push_back(vector<float>());
+		vector<float> vector{};
 		for (int Trow = 0; Trow < t.values[0].size(); Trow++)
 		{
 			float newV = 0;
-
 			for (int cal = 0; cal < t.values[0].size(); cal++) {
 				float v1 = values[Vcolumn][cal];
 				float v2 = t.values[cal][Trow];
 				if((v1+0.0) != 0.f && (v2+0.0) != 0.f) newV += (v1 * v2);
 			}
-
-			matrix[Vcolumn].push_back(newV);
+			vector.push_back(newV);
 		}
+		matrix.values.push_back(vector);
 	}
-	return Matrix{ matrix, color, edges };
+	return matrix;
 }
 
 Vector Matrix::middlePoint() {

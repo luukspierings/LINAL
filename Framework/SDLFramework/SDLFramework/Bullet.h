@@ -7,6 +7,7 @@ using namespace std;
 #include "Square.h"
 #include "Vector.h"
 #include "InputManager.h"
+#include "TranslationMatrix.h"
 
 class Bullet: public Square {
 

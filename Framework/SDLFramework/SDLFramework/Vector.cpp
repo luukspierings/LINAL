@@ -31,20 +31,6 @@ Matrix Vector::getDrawableMatrix(Vector startPos) {
 	return m;
 }
 
-Matrix Vector::getTranslatableMatrix() {
-
-	vector<vector<float>> v;
-	for (float c = 0; c <= values.size(); c++) {
-		v.push_back({});
-		for (float r = 0; r <= values.size(); r++) {
-			v[c].push_back((c == values.size() && r < values.size()) ? values[r] : (r == c) ? 1 : 0);
-		}
-	}
-
-	return Matrix(v, { 250,0,0,255 });
-}
-
-
 void Vector::scale(float scalair) {
 	for (float v = 0; v < values.size(); v++) {
 		values[v] *= scalair;

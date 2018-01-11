@@ -9,6 +9,7 @@ using namespace std;
 #include "InputManager.h"
 #include "Camera.h"
 #include "RotationMatrix.h"
+#include "TranslationMatrix.h"
 
 
 class Space;

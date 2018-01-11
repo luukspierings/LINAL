@@ -21,7 +21,6 @@ public:
 
 	Matrix getMatrix();
 	Matrix getDrawableMatrix(Vector startPos = Vector({ 0,0,0 }));
-	Matrix getTranslatableMatrix();
 	
 	void scale(float scalair);
 	Vector negative();

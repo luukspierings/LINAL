@@ -123,7 +123,7 @@ void Spaceship::update()
 	Vector directionVector = Vector(direction);
 	directionVector.scale(velocity / velocityScaleDown);
 
-	model = model * directionVector.getTranslatableMatrix();
+	model = TranslationMatrix(directionVector) * model;
 
 	if(velocity > minVelocity) velocity -= velocityDecrease;
 }

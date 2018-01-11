@@ -125,9 +125,7 @@
     <ClCompile Include="..\SDLFramework\InputManager.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
-    <ClCompile Include="UnitTest.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
+    <ClCompile Include="UnitTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\SDLFramework\SDL2.dll">
