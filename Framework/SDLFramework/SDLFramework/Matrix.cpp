@@ -9,8 +9,9 @@ void Matrix::draw(FWApplication* app) {
 
 	for (auto e : edges)
 	{
-		if (values[e.first][0] < 0.f || values[e.first][1] < 0.f || values[e.second][0] < 0.f || values[e.second][1] < 0.f) continue;
-
+		if ((values[e.first].size() > 3 && values[e.first][3] < 0.f) || (values[e.second].size() > 3 && values[e.second][3] < 0.f)) {
+			continue;
+		}
 		app->DrawLine(values[e.first][0], values[e.first][1], values[e.second][0], values[e.second][1]);
 	}
 
@@ -41,77 +42,34 @@ void Matrix::removeRow()
 	}
 }
 
+void Matrix::fitToDimension(int d)
+{
+	while (dimension() < d) addRow();
+	while (dimension() > d) removeRow();
+}
+
 void Matrix::addEdge(int v1, int v2)
 {
 	edges.push_back(pair<int, int>(v1, v2));
 }
 
-Matrix Matrix::operator*(const Matrix & trans)
+Matrix Matrix::operator*(const Matrix & m)
 {
-	vector<vector<float>> matrix;
-	if (values[0].size() != trans.values.size()) {
-		for (int Vcolumn = 0; Vcolumn < values.size(); Vcolumn++) {
-			values[Vcolumn].push_back(1);
-		}
+	if (dimension() != m.amount()) return Matrix{ *this };
 
-		matrix = Matrix(values).translate(trans).values;
-
-		for (int Vcolumn = 0; Vcolumn < matrix.size(); Vcolumn++) {
-			matrix[Vcolumn].pop_back();
-			values[Vcolumn].pop_back();
-		}
-
-	}
-	else {
-		matrix = Matrix(values).translate(trans).values;
-	}
-
-	return Matrix(matrix, color, edges);
-}
-
-Matrix Matrix::x(const Matrix & trans) {
-	vector<vector<float>> matrix = values;
-	if (matrix[0].size() > trans.values.size()) {
-		for (int Vcolumn = 0; Vcolumn < matrix.size(); Vcolumn++) {
-			matrix[Vcolumn].push_back(1.f);
-		}
-
-		matrix = Matrix(matrix).translate(trans).values;
-
-		/*for (int Vcolumn = 0; Vcolumn < matrix.size(); Vcolumn++) {
-			matrix[Vcolumn].pop_back();
-			values[Vcolumn].pop_back();
-		}*/
-
-	}
-	else if (matrix[0].size() < trans.values.size()) {
-		for (int Vcolumn = 0; Vcolumn < matrix.size(); Vcolumn++) {
-			matrix[Vcolumn].push_back(1.f);
-		}
-
-		matrix = Matrix(matrix).translate(trans).values;
-	}
-	else {
-		matrix = Matrix(matrix).translate(trans).values;
-	}
-
-	return Matrix(matrix, color, edges);
-}
-
-Matrix Matrix::translate(Matrix t) {
-	Matrix matrix { t };
+	Matrix matrix{ *this };
 	matrix.values.clear();
 
 	for (int Vcolumn = 0; Vcolumn < values.size(); Vcolumn++)
 	{
 		vector<float> vector{};
-		for (int Trow = 0; Trow < t.values[0].size(); Trow++)
+		for (int Trow = 0; Trow < m.values[0].size(); Trow++)
 		{
 			float newV = 0;
-			for (int cal = 0; cal < t.values[0].size(); cal++) {
+			for (int cal = 0; cal < m.values[0].size(); cal++) {
 				float v1 = values[Vcolumn][cal];
-				float v2 = t.values[cal][Trow];
-				if((v1+0.0) != 0.f && (v2+0.0) != 0.f) newV += (v1 * v2);
+				float v2 = m.values[cal][Trow];
+				if ((v1 + 0.0) != 0.f && (v2 + 0.0) != 0.f) newV += (v1 * v2);
 			}
 			vector.push_back(newV);
 		}

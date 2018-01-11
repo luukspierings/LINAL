@@ -1,6 +1,7 @@
 #include "stdafx.h"
 
 #include "Line.h"
+#include "Colors.h"
 
 Line::Line(Vector position, Vector positionTo)
 {
@@ -11,6 +12,6 @@ Line::Line(Vector position, Vector positionTo)
 
 	addEdge(0, 1);
 
-	color = Color({0,0,0,255});
+	color = Colors::cyan();
 
 }

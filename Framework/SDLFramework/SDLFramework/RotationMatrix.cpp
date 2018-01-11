@@ -26,6 +26,8 @@ RotationMatrix::RotationMatrix(float degrees, Vector rotationAxis, Vector rotati
 Matrix RotationMatrix::operator*(const Matrix & m)
 {
 	Matrix newM{ m };
+	newM.fitToDimension(m1.amount());
 	newM = newM * m1 * m2 * m3 * m4 * m5 * m6 * m7;
+	newM.fitToDimension(m.dimension());
 	return newM;
 }

@@ -32,15 +32,8 @@ TranslationMatrix::TranslationMatrix(vector<float> translations)
 Matrix TranslationMatrix::operator*(const Matrix & m)
 {
 	Matrix newM{ m };
-	int helpRows = 0;
-	while (newM.dimension() < translationM.dimension()) {
-		newM.addRow();
-		helpRows++;
-	}
+	newM.fitToDimension(translationM.amount());
 	newM = newM * translationM;
-	while (helpRows > 0) {
-		newM.removeRow();
-		helpRows--;
-	}
+	newM.fitToDimension(m.dimension());
 	return newM;
 }

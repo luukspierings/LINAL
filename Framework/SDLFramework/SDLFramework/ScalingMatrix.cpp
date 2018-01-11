@@ -29,6 +29,8 @@ ScalingMatrix::ScalingMatrix(vector<float> scales)
 Matrix ScalingMatrix::operator*(const Matrix & m)
 {
 	Matrix newM{ m };
+	newM.fitToDimension(scalingM.amount());
 	newM = newM * scalingM;
+	newM.fitToDimension(m.dimension());
 	return newM;
 }

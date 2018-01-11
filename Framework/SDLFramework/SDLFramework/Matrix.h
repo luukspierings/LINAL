@@ -29,17 +29,18 @@ public:
 	{}
 
 	void addValue(vector<float> value);
-
-	int dimension() const { return (values.size() > 0) ? values[0].size() : 0; }
 	void addRow(float v = 1.f);
 	void addRow(Vector v);
 	void removeRow();
 
+	int dimension() const { return (values.size() > 0) ? values[0].size() : 0; }
+	int amount() const { return values.size(); }
+
+	void fitToDimension(int d);
+
 	Vector middlePoint();
 
-	Matrix Matrix::operator*(const Matrix & trans);
-	Matrix x(const Matrix & trans);
-	Matrix translate(Matrix t = Matrix());
+	Matrix Matrix::operator*(const Matrix & m);
 
 
 	// For drawing the matrix
@@ -48,7 +49,7 @@ public:
 
 	void addEdge(int v1, int v2);
 	void draw(FWApplication* app);
-
+	
 
 private:
 

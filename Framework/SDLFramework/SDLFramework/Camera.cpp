@@ -91,24 +91,21 @@ void Camera::input(InputManager & inputM)
 
 Matrix Camera::toDraw(Matrix m)
 {
-	Matrix view{ m };
+	if (m.dimension() < 3) return m;
 
-	view = m.x(camera);
-	view = view.x(projection);
+	Matrix view{ m };
+	view.fitToDimension(camera.amount());
+
+	view = view * camera * projection;
 
 	for (float Vcolumn = 0.f; Vcolumn < view.values.size(); Vcolumn++) {
 
 		float w = view.values[Vcolumn][3];
-		if (w <= 0.f) {
-			view.values[Vcolumn][0] = -1.f;
-			view.values[Vcolumn][1] = -1.f;
-		}
-		else {
-			view.values[Vcolumn][0] = (wW / 2) + (((view.values[Vcolumn][0] + 1.f) / w) * (wW * 0.5f));
-			view.values[Vcolumn][1] = (wH / 2) + (((view.values[Vcolumn][1] + 1.f) / w) * (wH * 0.5f));
-			if(view.values[Vcolumn][2] != 0.f) view.values[Vcolumn][2] = (view.values[Vcolumn][2] * -1.f);
-		}
+		view.values[Vcolumn][0] = (wW / 2) + (((view.values[Vcolumn][0] + 1.f) / w) * (wW * 0.5f));
+		view.values[Vcolumn][1] = (wH / 2) + (((view.values[Vcolumn][1] + 1.f) / w) * (wH * 0.5f));
+		if(view.values[Vcolumn][2] != 0.f) view.values[Vcolumn][2] = (view.values[Vcolumn][2] * -1.f);
 	}
 
+	//view.fitToDimension(m.dimension()); Let de w-row stay in the matrix, so we can see if it should be drawn or not.
 	return view;
 }
