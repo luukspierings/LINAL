@@ -15,6 +15,7 @@
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>SDLFramework</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <ProjectName>SDLFramework</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -94,8 +95,12 @@
     <ClCompile Include="Matrix.cpp" />
     <ClCompile Include="Planet.cpp" />
     <ClCompile Include="RandomGenerator.cpp" />
+    <ClCompile Include="RotationMatrix.cpp" />
+    <ClCompile Include="ScalingMatrix.cpp" />
     <ClCompile Include="Spaceship.cpp" />
     <ClCompile Include="Square.cpp" />
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="TranslationMatrix.cpp" />
     <ClCompile Include="Triangle.cpp" />
     <ClCompile Include="Vector.cpp" />
   </ItemGroup>
@@ -108,14 +113,18 @@
     <ClInclude Include="Colors.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="FWApplication.h" />
+    <ClInclude Include="stdafx.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Line.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="Planet.h" />
     <ClInclude Include="RandomGenerator.h" />
+    <ClInclude Include="RotationMatrix.h" />
+    <ClInclude Include="ScalingMatrix.h" />
     <ClInclude Include="Space.h" />
     <ClInclude Include="Spaceship.h" />
     <ClInclude Include="Square.h" />
+    <ClInclude Include="TranslationMatrix.h" />
     <ClInclude Include="Triangle.h" />
     <ClInclude Include="Vector.h" />
     <ClInclude Include="IGameObject.h" />

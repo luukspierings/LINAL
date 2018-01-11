@@ -1,3 +1,5 @@
+#include "stdafx.h"
+
 #include "Triangle.h"
 
 Triangle::Triangle(Vector position, int size)

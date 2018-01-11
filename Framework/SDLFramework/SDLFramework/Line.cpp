@@ -1,3 +1,5 @@
+#include "stdafx.h"
+
 #include "Line.h"
 
 Line::Line(Vector position, Vector positionTo)

@@ -1,4 +1,4 @@
-
+#include "stdafx.h"
 
 #include "InputManager.h"
 
@@ -19,6 +19,23 @@ void InputManager::update()
 bool InputManager::isKeyDown(const char * key) const
 {
 	return keyStates[SDL_GetScancodeFromName(key)];
+}
+
+bool InputManager::isKeyPressed(char * key)
+{
+	auto f = find(keysPressed.begin(), keysPressed.end(), key);
+	if (isKeyDown(key)) {
+		if (f == keysPressed.end()) {
+			keysPressed.push_back(key);
+			return true;
+		}
+	}
+	else {
+		if (f != keysPressed.end()) {
+			keysPressed.erase(f);
+		}
+	}
+	return false;
 }
 
 Vector InputManager::getMouseLocation() const

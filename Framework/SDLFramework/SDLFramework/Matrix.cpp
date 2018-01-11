@@ -1,3 +1,5 @@
+#include "stdafx.h"
+
 #include "Matrix.h"
 
 
@@ -42,6 +44,27 @@ void Matrix::draw(FWApplication* app) {
 
 void Matrix::addValue(vector<float> value) {
 	values.push_back(value);
+}
+
+void Matrix::addRow(float v)
+{
+	for (int Vcolumn = 0; Vcolumn < values.size(); Vcolumn++) {
+		values[Vcolumn].push_back(v);
+	}
+}
+
+void Matrix::addRow(Vector v)
+{
+	for (int Vcolumn = 0; Vcolumn < v.values.size(); Vcolumn++) {
+		values[Vcolumn].push_back(v.values[Vcolumn]);
+	}
+}
+
+void Matrix::removeRow()
+{
+	for (int Vcolumn = 0; Vcolumn < values.size(); Vcolumn++) {
+		values[Vcolumn].pop_back();
+	}
 }
 
 void Matrix::addEdge(int v1, int v2)
@@ -124,7 +147,6 @@ Matrix Matrix::translate(Matrix t) {
 	return Matrix{ matrix, color, edges };
 }
 
-
 Vector Matrix::middlePoint() {
 
 	vector<float> middle;
@@ -139,70 +161,6 @@ Vector Matrix::middlePoint() {
 	}
 
 	return Vector(middle);
-}
-
-Vector Matrix::middleTranslation() {
-
-	vector<float> midP = middlePoint().values;
-	for (int r = 0; r < values[0].size(); r++) {
-		midP[r] -= values[0][r];
-	}
-	return Vector(midP);
-}
-
-
-Matrix Matrix::rotate(float degrees, Vector rotationAxis, Vector rotationPoint) {
-
-	degrees *= DEGREE_TO_RAD;
-
-	float rX = rotationAxis.values[0];
-	float rY = rotationAxis.values[1];
-	float rZ = rotationAxis.values[2];
-
-	float T1 = atan2(rZ, rX);
-	float T2 = atan2(rY, sqrt((rX * rX) + (rZ * rZ)));
-
-	Matrix m7 = Matrix({ { 1,0,0,0 },{ 0,1,0,0 },{ 0,0,1,0 },{ rotationPoint.values[0], rotationPoint.values[1], rotationPoint.values[2], 1 } });
-	Matrix m6 = Matrix({ { cos(T1),0,sin(T1),0 },{ 0,1,0,0 },{ -sin(T1),0,cos(T1),0 },{ 0,0,0,1 } });
-	Matrix m5 = Matrix({ { cos(T2), sin(T2),0,0 },{ -sin(T2),cos(T2),0,0 },{ 0,0,1,0 },{ 0,0,0,1 } });
-	Matrix m4 = Matrix({ { 1,0,0,0 },{ 0,cos(degrees),sin(degrees),0 },{ 0,-sin(degrees),cos(degrees),0 },{ 0,0,0,1 } });
-	Matrix m3 = Matrix({ { cos(T2),-sin(T2),0,0 },{ sin(T2),cos(T2),0,0 },{ 0,0,1,0 },{ 0,0,0,1 } });
-	Matrix m2 = Matrix({ { cos(T1),0,-sin(T1),0 },{ 0,1,0,0 },{ sin(T1),0,cos(T1),0 },{ 0,0,0,1 } });
-	Matrix m1 = Matrix({ { 1,0,0,0 },{ 0,1,0,0 },{ 0,0,1,0 },{ 0 - rotationPoint.values[0], 0 - rotationPoint.values[1], 0 - rotationPoint.values[2], 1 } });
-
-
-	Matrix m(*this);
-
-	m = m * m1 * m2 * m3 * m4 * m5 * m6 * m7;
-
-	/*Vector middle = middlePoint();
-
-	degrees *= DEGREE_TO_RAD;
-
-	Matrix m(*this);
-
-	middle.scale(-1.f);
-	m = m * middle.getTranslatableMatrix();
-
-	Matrix r;
-	switch (direction) {
-	case 'z':
-		r = Matrix({ { cos(degrees),sin(degrees),0 },{ -sin(degrees),cos(degrees),0 },{ 0,0,1 } });
-		break;
-	case 'x':
-		r = Matrix({ { 1,0,0 },{ 0,cos(degrees),sin(degrees) },{ 0,-sin(degrees), cos(degrees) } });
-		break;
-	case 'y':
-		r = Matrix({ { cos(degrees),0,sin(degrees) },{ 0,1,0 },{ -sin(degrees),0,cos(degrees) } });
-		break;
-	}
-	
-	m = m * r;
-
-	middle.scale(-1.f);
-	m = m * middle.getTranslatableMatrix();*/
-
-	return m;
 }
 
 

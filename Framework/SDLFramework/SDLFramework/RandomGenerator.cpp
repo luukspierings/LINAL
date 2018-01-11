@@ -1,3 +1,5 @@
+#include "stdafx.h"
+
 #include "RandomGenerator.h"
 
 int RandomGenerator::generate(int min, int max)

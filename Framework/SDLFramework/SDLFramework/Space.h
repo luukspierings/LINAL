@@ -18,6 +18,7 @@
 
 using namespace std;
 
+
 class Space {
 
 public:
@@ -32,7 +33,7 @@ public:
 	Spaceship spaceship;
 
 	Camera camera{ wW, wH };
-	bool birdsEyeView = true;
+	bool birdsEyeView = false;
 
 
 	Space(int wW, int wH) : wW(wW), wH(wH) {
@@ -55,7 +56,11 @@ public:
 
 	void input(InputManager& inputM) {
 
-		if (inputM.isKeyDown("Tab")) birdsEyeView = !birdsEyeView;
+		if (inputM.isKeyPressed("Tab")) birdsEyeView = !birdsEyeView;
+
+		// Setting birdseye view or first/third person view
+		if (birdsEyeView)	camera.input(inputM);
+		else				spaceship.setCameraPerspective(camera);
 
 		spaceship.input(inputM, *this);
 	}
@@ -85,10 +90,10 @@ public:
 
 	void draw(FWApplication* app)
 	{
-		app->SetColor(Colors::white());
+		// Background
+		app->SetColor(Colors::black());
 		app->DrawRect(0, 0, app->getW(), app->getH(), true);
 
-		if(!birdsEyeView) spaceship.setCameraPerspective(camera);
 
 		for each(Matrix m in matrixes) {
 			camera.toDraw(m).draw(app);

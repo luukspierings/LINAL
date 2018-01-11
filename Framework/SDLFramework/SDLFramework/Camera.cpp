@@ -1,3 +1,5 @@
+#include "stdafx.h"
+
 #include "Camera.h"
 
 #define PI 3.14159265358979323846
@@ -76,6 +78,13 @@ void Camera::calculate()
 		{ 0, 0, value1, value2 },
 		{ 0, 0, -1, 0 }
 	});
+
+}
+
+void Camera::input(InputManager & inputM)
+{
+
+
 
 }
 

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Colors.h"
 
 #include <math.h>  
 #include <vector>
@@ -14,12 +15,9 @@ class Vector {
 
 public:
 
-
 	vector<float> values;
 
-	Vector(vector<float> v = {0,0}): values(v) {
-		
-	}
+	Vector(vector<float> v = {0,0}): values(v) {}
 
 	Matrix getMatrix();
 	Matrix getDrawableMatrix(Vector startPos = Vector({ 0,0,0 }));

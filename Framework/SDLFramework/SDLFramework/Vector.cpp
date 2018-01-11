@@ -1,3 +1,6 @@
+
+#include "stdafx.h"
+
 #include "Vector.h"
 
 #include "Matrix.h"
@@ -23,7 +26,7 @@ Matrix Vector::getDrawableMatrix(Vector startPos) {
 		v[0].push_back(startPos.values[n]);
 		v[1].push_back(startPos.values[n] + values[n]);
 	}
-	Matrix m(v, { 250,0,0,255 });
+	Matrix m(v, Colors::orange());
 	m.addEdge(0, 1);
 	return m;
 }

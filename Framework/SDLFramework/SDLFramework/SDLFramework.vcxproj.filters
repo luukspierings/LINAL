@@ -10,16 +10,13 @@
     <Filter Include="LINAL\Objects">
       <UniqueIdentifier>{85c55fc9-f429-4a2d-873d-4dd03c66af87}</UniqueIdentifier>
     </Filter>
+    <Filter Include="LINAL\Matrices">
+      <UniqueIdentifier>{70ebfaec-2314-4cc3-9278-d3f697a76116}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Matrix.cpp">
-      <Filter>LINAL</Filter>
-    </ClCompile>
     <ClCompile Include="Vector.cpp">
       <Filter>LINAL</Filter>
-    </ClCompile>
-    <ClCompile Include="InputManager.cpp">
-      <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="FWApplication.cpp">
       <Filter>Engine</Filter>
@@ -31,9 +28,6 @@
       <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
-      <Filter>LINAL</Filter>
-    </ClCompile>
-    <ClCompile Include="Line.cpp">
       <Filter>LINAL</Filter>
     </ClCompile>
     <ClCompile Include="Bullet.cpp">
@@ -48,7 +42,28 @@
     <ClCompile Include="Triangle.cpp">
       <Filter>LINAL\Objects</Filter>
     </ClCompile>
-    <ClCompile Include="Planet.cpp" />
+    <ClCompile Include="Line.cpp">
+      <Filter>LINAL\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Matrix.cpp">
+      <Filter>LINAL\Matrices</Filter>
+    </ClCompile>
+    <ClCompile Include="Planet.cpp">
+      <Filter>LINAL\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="RotationMatrix.cpp">
+      <Filter>LINAL\Matrices</Filter>
+    </ClCompile>
+    <ClCompile Include="ScalingMatrix.cpp">
+      <Filter>LINAL\Matrices</Filter>
+    </ClCompile>
+    <ClCompile Include="TranslationMatrix.cpp">
+      <Filter>LINAL\Matrices</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SDL2.dll" />
@@ -58,9 +73,6 @@
       <Filter>LINAL</Filter>
     </ClInclude>
     <ClInclude Include="Vector.h">
-      <Filter>LINAL</Filter>
-    </ClInclude>
-    <ClInclude Include="Matrix.h">
       <Filter>LINAL</Filter>
     </ClInclude>
     <ClInclude Include="InputManager.h">
@@ -81,9 +93,6 @@
     <ClInclude Include="Camera.h">
       <Filter>LINAL</Filter>
     </ClInclude>
-    <ClInclude Include="Line.h">
-      <Filter>LINAL</Filter>
-    </ClInclude>
     <ClInclude Include="Bullet.h">
       <Filter>LINAL\Objects</Filter>
     </ClInclude>
@@ -102,5 +111,21 @@
     <ClInclude Include="Colors.h">
       <Filter>Engine</Filter>
     </ClInclude>
+    <ClInclude Include="Line.h">
+      <Filter>LINAL\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix.h">
+      <Filter>LINAL\Matrices</Filter>
+    </ClInclude>
+    <ClInclude Include="RotationMatrix.h">
+      <Filter>LINAL\Matrices</Filter>
+    </ClInclude>
+    <ClInclude Include="ScalingMatrix.h">
+      <Filter>LINAL\Matrices</Filter>
+    </ClInclude>
+    <ClInclude Include="TranslationMatrix.h">
+      <Filter>LINAL\Matrices</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h" />
   </ItemGroup>
 </Project>

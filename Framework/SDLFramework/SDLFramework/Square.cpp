@@ -1,3 +1,5 @@
+#include "stdafx.h"
+
 #include "Square.h"
 
 Square::Square(Vector position, float size)

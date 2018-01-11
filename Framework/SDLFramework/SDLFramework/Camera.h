@@ -6,6 +6,7 @@ using namespace std;
 
 #include "Matrix.h"
 #include "Vector.h"
+#include "InputManager.h"
 
 
 class Camera {
@@ -23,6 +24,7 @@ public:
 
 	void calculate();
 
+	void input(InputManager & inputM);
 
 private:
 

@@ -1,3 +1,5 @@
+#include "stdafx.h"
+
 #include "FWApplication.h"
 #include "Config.h"
 #include "IGameObject.h"

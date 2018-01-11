@@ -2,6 +2,7 @@
 
 #include "FWApplication.h"
 #include "Vector.h"
+#include "Colors.h"
 
 #include <math.h>  
 #include <vector>
@@ -15,46 +16,41 @@ class Matrix {
 
 public:
 
-	vector<pair<int,int>> edges;
-
 	vector<vector<float>> values;
 	//       (n) v1  v2  v3 
-	//  n.1(x)  [ 1 
-	//  n.2(y)  [ 2
-	//  1.2(z)  [ 4
+	//     (x)  [ 1 
+	//     (y)  [ 2
+	//     (z)  [ 4
 
-
-	Color color;
-
-	Matrix(vector<vector<float>> v = {}, Color color = { 0,0,250,255 }, vector<pair<int, int>> edges = {}) :
+	Matrix(vector<vector<float>> v = {}, Color color = Colors::white(), vector<pair<int, int>> edges = {}) :
 		color(color), 
 		values(v),
 		edges(edges)
 	{}
 
-	void draw(FWApplication* app);
-
 	void addValue(vector<float> value);
-	void addEdge(int v1, int v2);
 
+	int dimension() { return (values.size() > 0) ? values[0].size() : 0; }
+	void addRow(float v = 1.f);
+	void addRow(Vector v);
+	void removeRow();
 
+	Vector middlePoint();
+
+	Matrix Matrix::operator*(const Matrix & trans);
 	Matrix x(const Matrix & trans);
 	Matrix translate(Matrix t = Matrix());
 
 
-	Vector middlePoint();
-	Vector middleTranslation();
+	// For drawing the matrix
+	vector<pair<int, int>> edges;
+	Color color;
 
-
-	Matrix rotate(float degrees, Vector rotationAxis, Vector rotationPoint = Vector({0,0,0}));
-
-	Matrix Matrix::operator*(const Matrix & trans);
+	void addEdge(int v1, int v2);
+	void draw(FWApplication* app);
 
 
 private:
-
-
-
 
 
 };

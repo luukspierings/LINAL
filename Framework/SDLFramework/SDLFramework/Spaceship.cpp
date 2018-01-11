@@ -1,6 +1,9 @@
+#include "stdafx.h"
+
 #include "Spaceship.h"
 
 #include "Space.h"
+
 
 Spaceship::Spaceship(Vector position, float size): size(size)
 {
@@ -63,29 +66,29 @@ void Spaceship::accelerate()
 
 void Spaceship::rollLeft() {
 	Vector v{ backMiddle() - frontMiddle() };
-	model = model.rotate(turnDegrees, v.normalize(), model.middlePoint());
+	model = RotationMatrix(turnDegrees, v.normalize(), model.middlePoint()) * model;
 }
 void Spaceship::rollRight() {
 	Vector v{ backMiddle() - frontMiddle() };
-	model = model.rotate(-turnDegrees, v.normalize(), model.middlePoint());
+	model = RotationMatrix(-turnDegrees, v.normalize(), model.middlePoint()) * model;
 }
 
 void Spaceship::moveLeft() {
 	Vector v{ upMiddle() - downMiddle() };
-	model = model.rotate(turnDegrees, v.normalize(), model.middlePoint());
+	model = RotationMatrix(turnDegrees, v.normalize(), model.middlePoint()) * model;
 }
 void Spaceship::moveRight() {
 	Vector v{ upMiddle() - downMiddle() };
-	model = model.rotate(-turnDegrees, v.normalize(), model.middlePoint());
+	model = RotationMatrix(-turnDegrees, v.normalize(), model.middlePoint()) * model;
 }
 
 void Spaceship::moveUp() {
 	Vector v{ leftMiddle() - rightMiddle() };
-	model = model.rotate(turnDegrees, v.normalize(), model.middlePoint());
+	model = RotationMatrix(turnDegrees, v.normalize(), model.middlePoint()) * model;
 }
 void Spaceship::moveDown() {
 	Vector v{ leftMiddle() - rightMiddle() };
-	model = model.rotate(-turnDegrees, v.normalize(), model.middlePoint());
+	model = RotationMatrix(-turnDegrees, v.normalize(), model.middlePoint()) * model;
 }
 
 
@@ -104,7 +107,7 @@ void Spaceship::input(InputManager& inputM, Space& space)
 			bulletTimer = 0;
 		}
 	}
-	if (inputM.isKeyDown("H")) crosshairVisible = !crosshairVisible;
+	if (inputM.isKeyPressed("H")) crosshairVisible = !crosshairVisible;
 
 	bulletTimer++;
 }
