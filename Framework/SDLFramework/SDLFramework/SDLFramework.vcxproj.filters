@@ -7,21 +7,15 @@
     <Filter Include="Engine">
       <UniqueIdentifier>{3dc8acb2-6eb1-41d3-a852-e286495acfa9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="LINAL\Objects">
+      <UniqueIdentifier>{85c55fc9-f429-4a2d-873d-4dd03c66af87}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Matrix.cpp">
       <Filter>LINAL</Filter>
     </ClCompile>
     <ClCompile Include="Vector.cpp">
-      <Filter>LINAL</Filter>
-    </ClCompile>
-    <ClCompile Include="Triangle.cpp">
-      <Filter>LINAL</Filter>
-    </ClCompile>
-    <ClCompile Include="Square.cpp">
-      <Filter>LINAL</Filter>
-    </ClCompile>
-    <ClCompile Include="Spaceship.cpp">
       <Filter>LINAL</Filter>
     </ClCompile>
     <ClCompile Include="InputManager.cpp">
@@ -43,8 +37,18 @@
       <Filter>LINAL</Filter>
     </ClCompile>
     <ClCompile Include="Bullet.cpp">
-      <Filter>LINAL</Filter>
+      <Filter>LINAL\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="Spaceship.cpp">
+      <Filter>LINAL\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Square.cpp">
+      <Filter>LINAL\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Triangle.cpp">
+      <Filter>LINAL\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Planet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SDL2.dll" />
@@ -57,15 +61,6 @@
       <Filter>LINAL</Filter>
     </ClInclude>
     <ClInclude Include="Matrix.h">
-      <Filter>LINAL</Filter>
-    </ClInclude>
-    <ClInclude Include="Triangle.h">
-      <Filter>LINAL</Filter>
-    </ClInclude>
-    <ClInclude Include="Square.h">
-      <Filter>LINAL</Filter>
-    </ClInclude>
-    <ClInclude Include="Spaceship.h">
       <Filter>LINAL</Filter>
     </ClInclude>
     <ClInclude Include="InputManager.h">
@@ -90,7 +85,22 @@
       <Filter>LINAL</Filter>
     </ClInclude>
     <ClInclude Include="Bullet.h">
-      <Filter>LINAL</Filter>
+      <Filter>LINAL\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Spaceship.h">
+      <Filter>LINAL\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Square.h">
+      <Filter>LINAL\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Triangle.h">
+      <Filter>LINAL\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Planet.h">
+      <Filter>LINAL\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Colors.h">
+      <Filter>Engine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

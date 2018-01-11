@@ -7,12 +7,13 @@ using namespace std;
 #include "Square.h"
 #include "Vector.h"
 #include "InputManager.h"
+#include "Camera.h"
 
 class Space;
 class Spaceship {
 
 public:
-	Spaceship(Vector position = Vector({ 0,0,-30 }), int size = 5);
+	Spaceship(Vector position = Vector({ 0,0,-30 }), float size = 5.f);
 
 	void accelerate();
 	
@@ -29,10 +30,13 @@ public:
 
 	void update();
 
+	void setCameraPerspective(Camera & camera);
+
 	Matrix getDrawable() const;
-	Vector getDrawableDirection() const;
+	Vector getDirection() const;
 
 	bool isCrosshairVisible() const;
+	Matrix getDrawableCrosshair();
 
 	Vector backMiddle();
 	Vector backRight();
@@ -55,13 +59,16 @@ private:
 	Matrix model;
 	int size;
 
-
 	Square aabb;
 
 	float turnDegrees = 2.f;
+
 	float velocity = 2.f;
+	float velocityStep = 0.5f;
+	float velocityDecrease = 0.1f;
 	float minVelocity = 2.f;
 	float maxVelocity = 20.f;
+	float velocityScaleDown = 1500.f;
 
 	Vector direction;
 	bool crosshairVisible = true;

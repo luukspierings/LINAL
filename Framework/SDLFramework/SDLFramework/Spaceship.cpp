@@ -2,45 +2,9 @@
 
 #include "Space.h"
 
-Spaceship::Spaceship(Vector position, int size)
+Spaceship::Spaceship(Vector position, float size): size(size)
 {
-
 	if (position.values.size() < 3) return;
-
-	this->size = size;
-
-	//float x = position.values[0];
-	//float y = position.values[1];
-	//float z = position.values[2];
-	//
-	//float w = size;
-	//float h = size / 2;
-	//float l = size;
-
-	//float foldMargin = w/20;
-
-	//model.addValue({ x, y+h, z });								
-	//model.addValue({ x + (w / 2) - foldMargin, y + h, z });
-	//model.addValue({ x + (w / 2), y, z });
-	//model.addValue({ x + (w / 2) + foldMargin, y + h, z });
-	//model.addValue({ x + w, y + h, z });
-	//
-	//model.addValue({ x + (w / 2), y+h, z+l });
-
-	//// not being drawed, this is just a help point in the middle for determining the crosshair line
-	//model.addValue({ x + (w / 2), y + h, z });
-
-
-	//model.addEdge(0, 1);
-	//model.addEdge(1, 2);
-	//model.addEdge(2, 3);
-	//model.addEdge(3, 4);
-
-	//model.addEdge(0, 5);
-	//model.addEdge(1, 5);
-	//model.addEdge(2, 5);
-	//model.addEdge(3, 5);
-	//model.addEdge(4, 5);
 
 	float x = position.values[0];
 	float y = position.values[1];
@@ -70,21 +34,6 @@ Spaceship::Spaceship(Vector position, int size)
 	model.addValue({ x + (size / 2), yS, z + (size / 2) }); // 12: up middle
 	model.addValue({ x + (size / 2), y, z + (size / 2) }); // 13: down middle
 
-
-	//model.addValue({ x ,y + (size / 2),z }); // 10
-	//model.addValue({ xS,y + (size / 2),z }); // 11
-
-	//model.addValue({ x ,y + (size / 2),zS }); // 12
-	//model.addValue({ xS,y + (size / 2),zS }); // 13
-
-	//model.addValue({ x + (size / 2),y,z }); // 14
-	//model.addValue({ x + (size / 2),y + size,z }); // 15
-
-	//model.addValue({ x + (size / 2),y,zS }); // 16
-	//model.addValue({ x + (size / 2),y + size,zS }); // 17
-
-
-
 	// front lines
 	model.addEdge(0, 1);
 	model.addEdge(1, 2);
@@ -104,12 +53,12 @@ Spaceship::Spaceship(Vector position, int size)
 	model.addEdge(3, 7);
 
 
-
+	aabb = Square{ position, size };
 }
 
 void Spaceship::accelerate()
 {
-	if(velocity < maxVelocity)velocity += 0.5f;
+	if(velocity < maxVelocity) velocity += velocityStep;
 }
 
 void Spaceship::rollLeft() {
@@ -162,7 +111,6 @@ void Spaceship::input(InputManager& inputM, Space& space)
 
 void Spaceship::update()
 {
-
 	Vector rightPoint = backRight();
 	Vector backPoint = backMiddle();
 	Vector downPoint = backDown();
@@ -170,11 +118,32 @@ void Spaceship::update()
 	direction = (backPoint - downPoint).out((backPoint - rightPoint));
 
 	Vector directionVector = Vector(direction);
-	directionVector.scale(velocity / 1500.f);
+	directionVector.scale(velocity / velocityScaleDown);
 
 	model = model * directionVector.getTranslatableMatrix();
 
-	if(velocity > minVelocity) velocity -= 0.1f;
+	if(velocity > minVelocity) velocity -= velocityDecrease;
+}
+
+void Spaceship::setCameraPerspective(Camera & camera)
+{
+	Vector back = backMiddle();
+	Vector front = frontMiddle();
+	Vector left = backLeft();
+	Vector right = backRight();
+	Vector down = backDown();
+
+	Vector up = (back - front).out(left - right);
+	up = up.normalize();
+	camera.setUp(up);
+
+	Vector birdsEye = (down - back).out((back - right));
+	birdsEye.scale(1.f / 2.2f);
+
+	birdsEye = back + birdsEye;
+
+	camera.setLookat(back);
+	camera.setEye(birdsEye);
 }
 
 Matrix Spaceship::getDrawable() const
@@ -182,7 +151,7 @@ Matrix Spaceship::getDrawable() const
 	return model;
 }
 
-Vector Spaceship::getDrawableDirection() const
+Vector Spaceship::getDirection() const
 {
 	return direction;
 }
@@ -190,6 +159,11 @@ Vector Spaceship::getDrawableDirection() const
 bool Spaceship::isCrosshairVisible() const
 {
 	return crosshairVisible;
+}
+
+Matrix Spaceship::getDrawableCrosshair()
+{
+	return direction.getDrawableMatrix(frontMiddle());
 }
 
 Vector Spaceship::backMiddle()

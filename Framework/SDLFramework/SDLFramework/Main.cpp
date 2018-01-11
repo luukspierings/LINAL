@@ -25,7 +25,7 @@ int main(int args[])
 
 	InputManager inputManager;
 
-	Space space{};
+	Space space{ application->getW(), application->getH() };
 
 
 	while (application->IsRunning())
@@ -45,27 +45,13 @@ int main(int args[])
 					application->Quit();
 					break;
 			}
-
-			if (event.wheel.y == 1) // scroll up
-			{
-				space.scrollUp(application);
-			}
-			else if (event.wheel.y == -1) // scroll down
-			{
-				space.scrollDown(application);
-			}
 		}
 		
 		
 		space.input(inputManager);
-
 		space.update();
-
 		space.draw(application);
 
-
-		//application->UpdateGameObjects();
-		//application->RenderGameObjects();
 		application->EndTick();
 	}
 		

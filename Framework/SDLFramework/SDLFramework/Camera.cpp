@@ -45,7 +45,6 @@ void Camera::setUp(Vector v) {
 
 void Camera::calculate()
 {
-
 	z = Vector((eye - lookAt).normalize());
 	y = Vector(up.normalize());
 	x = Vector(y.out(z).normalize());
@@ -59,13 +58,6 @@ void Camera::calculate()
 	if (ycam != 0.f) ycam *= -1;
 	if (zcam != 0.f) zcam *= -1;
 
-	/*camera = Matrix({
-		{ x.values[0], x.values[1], x.values[2], xcam },
-		{ y.values[0], y.values[1], y.values[2], ycam },
-		{ z.values[0], z.values[1], z.values[2], zcam },
-		{ 0,0,0,1 }
-	});*/
-
 	camera = Matrix({
 		{ x.values[0], y.values[0], z.values[0], 0 },
 		{ x.values[1], y.values[1], z.values[1], 0 },
@@ -77,13 +69,6 @@ void Camera::calculate()
 
 	float value1 = ((far * -1) / (far - near));
 	float value2 = ((far * -1 * near) / (far - near));
-
-	/*projection = Matrix({
-		{ scale, 0, 0, 0 },
-		{ 0, scale, 0, 0 },
-		{ 0, 0, value1, -1 },
-		{ 0, 0, value2, 0 }
-	});*/
 
 	projection = Matrix({
 		{ scale, 0, 0, 0 },
@@ -99,17 +84,9 @@ Matrix Camera::toDraw(Matrix m)
 {
 	Matrix view{ m };
 
-	//// translate projection over camera
-	//view = projection.x(camera);
-
-	//// translate view over real points
-	//view = m.x(view);
-
 	view = m.x(camera);
 	view = view.x(projection);
 
-
-	//// naberekening
 	for (float Vcolumn = 0.f; Vcolumn < view.values.size(); Vcolumn++) {
 
 		float w = view.values[Vcolumn][3];
