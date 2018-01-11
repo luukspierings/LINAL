@@ -11,6 +11,7 @@ using namespace std;
 class Bullet: public Square {
 
 public:
+	Bullet(Vector position = Vector({ 0,0,0 }), Vector direction = Vector({ 0,0,0 })) : direction(direction), Square(position, 0.3f) {};
 
 	void update();
 	
