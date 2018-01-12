@@ -19,7 +19,6 @@ public:
 
 	Vector(vector<float> v = {0,0}): values(v) {}
 
-	Matrix getMatrix();
 	Matrix getDrawableMatrix(Vector startPos = Vector({ 0,0,0 }));
 	
 	void scale(float scalair);
