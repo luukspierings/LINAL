@@ -81,11 +81,19 @@ void Camera::calculate()
 
 }
 
+void Camera::initiateBirdsEyeView(Vector lookat)
+{
+	setEye(lookAt - Vector({0,20,0,0}));
+}
+
 void Camera::input(InputManager & inputM)
 {
-
-
-
+	if (inputM.isKeyDown("Left"));
+	if (inputM.isKeyDown("Right"));
+	if (inputM.isKeyDown("Up"));
+	if (inputM.isKeyDown("Down"));
+	if (inputM.isKeyDown("Right Shift"));
+	if (inputM.isKeyDown("Keypad 1"));
 }
 
 

@@ -24,6 +24,7 @@ public:
 
 	void calculate();
 
+	void initiateBirdsEyeView(Vector lookat);
 	void input(InputManager & inputM);
 
 private:

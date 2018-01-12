@@ -46,8 +46,6 @@ public:
 		matrixes.push_back(Square(Vector({ sW,sW,0 }), sW));
 		matrixes.push_back(Square(Vector({ sW,-2*sW,sW }), sW));
 		matrixes.push_back(Square(Vector({ -2*sW,-2*sW,0 }), sW));
-		//matrixes.push_back(Square(Vector({ 0,0,0 }), sW));
-		//matrixes.push_back(Square(Vector({ 0,0,-5*sW }), sW));
 
 		// helping point for finding origin
 		matrixes.push_back(Line(Vector({ -originSize,0,0 }), Vector({ originSize,0,0 })));
@@ -58,10 +56,18 @@ public:
 
 	void input(InputManager& inputM) {
 
-		if (inputM.isKeyPressed("Tab")) birdsEyeView = !birdsEyeView;
+		if (inputM.isKeyPressed("Tab")) {
+			birdsEyeView = !birdsEyeView;
+			if (birdsEyeView) {
+				camera.initiateBirdsEyeView(spaceship.upMiddle());
+			}
+		}
 
 		// Setting birdseye view or first/third person view
-		if (birdsEyeView)	camera.input(inputM);
+		if (birdsEyeView) {
+			camera.setLookat(spaceship.upMiddle());
+			camera.input(inputM);
+		}
 		else				spaceship.setCameraPerspective(camera);
 
 		spaceship.input(inputM, *this);
