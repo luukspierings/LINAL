@@ -66,12 +66,11 @@ private:
 
 	float turnDegrees = 2.f;
 
-	float velocity = 2.f;
-	float velocityStep = 0.5f;
-	float velocityDecrease = 0.1f;
+	float velocity = 0.f;
+	float velocityStep = 20.0f;
+	float velocityDecrease = 20.f;
 	float minVelocity = 0.f;
-	float maxVelocity = 20.f;
-	float velocityScaleDown = 1500.f;
+	float maxVelocity = 40.f;
 
 	Vector direction;
 	bool crosshairVisible = true;

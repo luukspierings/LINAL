@@ -3,6 +3,7 @@
 #include "Spaceship.h"
 
 #include "Space.h"
+#include "FWApplication.h"
 
 
 Spaceship::Spaceship(Vector position, float size): size(size)
@@ -61,7 +62,7 @@ Spaceship::Spaceship(Vector position, float size): size(size)
 
 void Spaceship::accelerate()
 {
-	if(velocity < maxVelocity) velocity += velocityStep;
+	if(velocity < maxVelocity) velocity += (velocityStep * FWApplication::GetInstance()->getDeltaTime()) + (velocityDecrease * FWApplication::GetInstance()->getDeltaTime());
 }
 
 void Spaceship::rollLeft() {
@@ -103,7 +104,7 @@ void Spaceship::input(InputManager& inputM, Space& space)
 	if (inputM.isKeyDown("S")) moveDown();
 	if (inputM.isKeyDown("Space")) {
 		if (bulletTimer >= bulletCooldown) {
-			space.addBullet();
+			space.addBullet(velocity);
 			bulletTimer = 0;
 		}
 	}
@@ -118,14 +119,16 @@ void Spaceship::update()
 	Vector backPoint = backMiddle();
 	Vector downPoint = backDown();
 
-	direction = (backPoint - downPoint).out((backPoint - rightPoint));
+	direction = (backPoint - rightPoint).out((backPoint - downPoint));
 
 	Vector directionVector = Vector(direction);
-	directionVector.scale(velocity / velocityScaleDown);
+	directionVector = directionVector.normalize();
+	directionVector.scale(velocity * FWApplication::GetInstance()->getDeltaTime());
 
 	model = TranslationMatrix(directionVector) * model;
 
-	if(velocity > minVelocity) velocity -= velocityDecrease;
+	if(velocity > minVelocity) velocity -= (velocityDecrease * FWApplication::GetInstance()->getDeltaTime());
+	if (velocity < minVelocity) velocity = minVelocity;
 }
 
 void Spaceship::setCameraPerspective(Camera & camera)
@@ -140,7 +143,7 @@ void Spaceship::setCameraPerspective(Camera & camera)
 	up = up.normalize();
 	camera.setUp(up);
 
-	Vector birdsEye = (down - back).out((back - right));
+	Vector birdsEye = (back - right).out((down - back));
 	birdsEye.scale(1.f / 2.2f);
 
 	birdsEye = back + birdsEye;
