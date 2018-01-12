@@ -7,7 +7,7 @@ TranslationMatrix::TranslationMatrix(int size, float translation)
 {
 	for (int dimensionX = 0; dimensionX <= size; dimensionX++) {
 		vector<float> c{};
-		for (int dimensionY = 1; dimensionY <= size; dimensionY++) {
+		for (int dimensionY = 0; dimensionY <= size; dimensionY++) {
 			if (dimensionX == size && dimensionY != size) c.push_back(translation);
 			else if (dimensionX == dimensionY) c.push_back(1);
 			else c.push_back(0);

@@ -9,6 +9,7 @@
 #include "Camera.h"
 #include "Bullet.h"
 #include "Colors.h"
+#include "Planet.h"
 
 #include <math.h>  
 #include <vector>
@@ -31,6 +32,7 @@ public:
 	vector<Matrix> matrixes;
 	vector<Bullet> bullets;
 	Spaceship spaceship;
+	Planet planet{ Vector({0,0,0}) };
 
 	Camera camera{ wW, wH };
 	bool birdsEyeView = false;
@@ -44,8 +46,8 @@ public:
 		matrixes.push_back(Square(Vector({ sW,sW,0 }), sW));
 		matrixes.push_back(Square(Vector({ sW,-2*sW,sW }), sW));
 		matrixes.push_back(Square(Vector({ -2*sW,-2*sW,0 }), sW));
-		matrixes.push_back(Square(Vector({ 0,0,0 }), sW));
-		matrixes.push_back(Square(Vector({ 0,0,-5*sW }), sW));
+		//matrixes.push_back(Square(Vector({ 0,0,0 }), sW));
+		//matrixes.push_back(Square(Vector({ 0,0,-5*sW }), sW));
 
 		// helping point for finding origin
 		matrixes.push_back(Line(Vector({ -originSize,0,0 }), Vector({ originSize,0,0 })));
@@ -67,6 +69,7 @@ public:
 
 	void update() {
 
+		planet.update();
 		spaceship.update();
 
 		for (auto& b : bullets) {
@@ -94,6 +97,7 @@ public:
 		app->SetColor(Colors::black());
 		app->DrawRect(0, 0, app->getW(), app->getH(), true);
 
+		camera.toDraw(planet).draw(app);
 
 		for each(Matrix m in matrixes) {
 			camera.toDraw(m).draw(app);

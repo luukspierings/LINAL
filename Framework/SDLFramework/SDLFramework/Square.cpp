@@ -2,7 +2,7 @@
 
 #include "Square.h"
 
-Square::Square(Vector position, float size)
+Square::Square(Vector position, float size, Color color)
 {
 
 	if (position.values.size() < 3) return;
@@ -48,7 +48,6 @@ Square::Square(Vector position, float size)
 	addEdge(3, 7);
 
 
-	//test
-	//addEdge(0, 6);
+	this->color = color;
 
 }
