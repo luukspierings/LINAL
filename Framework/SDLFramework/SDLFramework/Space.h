@@ -84,11 +84,11 @@ public:
 
 	}
 
-	void addBullet() {
+	void addBullet(float relativeVelocity = 0.f) {
 		Vector pos = spaceship.frontMiddle();
 		Vector dir = spaceship.getDirection().normalize();
 
-		bullets.push_back(Bullet{pos,dir});
+		bullets.push_back(Bullet{pos, dir, relativeVelocity});
 	}
 
 	void draw(FWApplication* app)

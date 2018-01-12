@@ -185,6 +185,10 @@ void FWApplication::EndTick()
 	}
 }
 
+float FWApplication::getDeltaTime() {
+	return static_cast<float>(mDeltaTimeMS)/1000;
+}
+
 void FWApplication::UpdateGameObjects()
 {
 	for (IGameObject * obj : mGameObjects)

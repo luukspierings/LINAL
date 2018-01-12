@@ -11,22 +11,32 @@ using namespace std;
 
 class Bullet: public Square {
 
+private:
+
+
+
 public:
-	Bullet(Vector position = Vector({ 0,0,0 }), Vector direction = Vector({ 0,0,0 })) : direction(direction), Square(position, 0.3f) {};
+	Bullet(Vector position = Vector({ 0,0,0 }), Vector direction = Vector({ 0,0,0 }), float relativeVelocity = 0.f, float size = 0.1f) : 
+		size(size), 
+		direction(direction), 
+		relativeVelocity(relativeVelocity), 
+		Square(position, size) 
+	{};
 
 	void update();
 	
 	bool alive() {
-		return (lifetime > 0);
+		return (lifetime > 0.f);
 	}
 
 private:
 
-	int lifetime = 200;
+	float lifetime = 500.f;
 
-	float size = 0.3f;
+	float size = 0.1f;
 
-	float velocity = 2.f;
+	float velocity = 1.f;
+	float relativeVelocity = 0.f;
 
 	Vector direction;
 
