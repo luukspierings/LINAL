@@ -14,7 +14,7 @@ namespace UnitTests
 		TEST_METHOD(MatrixCreation)
 		{
 
-
+			Assert::AreEqual("hallo", "hallo");
 
 		}
 
