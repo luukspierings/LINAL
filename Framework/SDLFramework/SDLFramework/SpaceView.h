@@ -44,8 +44,7 @@ public:
 		CameraModes::BIRDS_EYE
 	};
 
-	int collisionTimer = 0;
-	int collisionTimerMax = 20;
+	bool gameover = false;
 
 	SpaceView(int wW, int wH) : wW(wW), wH(wH) {
 
@@ -66,18 +65,9 @@ public:
 			float randomNumberX = static_cast<float>(RandomGenerator::getInstance().generate(-40, 40));
 			float randomNumberY = static_cast<float>(RandomGenerator::getInstance().generate(-40, 40));
 			float randomNumberZ = static_cast<float>(RandomGenerator::getInstance().generate(0, 100));
-			matrixes.push_back(Square(Vector({randomNumberX, randomNumberY, randomNumberZ}), sW, Color{255,0,0,255}));
+			matrixes.push_back(Square(Vector({randomNumberX, randomNumberY, randomNumberZ}), sW, Colors::red()));
 		}
 
-		
-		/*matrixes.push_back(Square(Vector({ sW,sW,0 }), sW));
-		matrixes.push_back(Square(Vector({ sW,-2*sW,sW }), sW));
-		matrixes.push_back(Square(Vector({ -2*sW,-2*sW,0 }), sW));*/
-
-		// helping point for finding origin
-		matrixes.push_back(Line(Vector({ -originSize,0,0 }), Vector({ originSize,0,0 })));
-		matrixes.push_back(Line(Vector({ 0,-originSize,0 }), Vector({ 0,originSize,0 })));
-		matrixes.push_back(Line(Vector({ 0,0,-originSize }), Vector({ 0,0,originSize })));
 	}
 	
 	void input(InputManager& inputM) {
@@ -114,24 +104,16 @@ public:
 
 		for (auto& b : bullets) {
 			b.update();
+			if (planet.collidesWith(b.middlePoint(), b.direction)) {
+				gameover = true;
+			}
 		}
 
 		for (auto it = bullets.begin(); it != bullets.end();)
-		{
-			if (collisionTimer == collisionTimerMax) {
-				for (auto mat = matrixes.begin(); mat != matrixes.end();) {
-					if (mat->collidesWith(it->middlePoint(), it->direction)) {
-						mat = matrixes.erase(mat);
-					}
-					else ++mat;
-				}
-			}
-
+		{	
 			if (!it->alive()) it = bullets.erase(it);
 			else ++it;
 		}
-		if (collisionTimer == collisionTimerMax) collisionTimer = 0;
-		else collisionTimer++;
 
 	}
 
