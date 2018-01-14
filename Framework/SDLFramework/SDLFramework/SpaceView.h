@@ -54,8 +54,8 @@ public:
 		Vector B({ 2,2,1 });
 		Vector C({ 1,2,2 });
 
-		lP.intersects(A, B, C, p);
-
+		Vector intersection = lP.intersection(A, B, C, p);
+		bool inplane = intersection.inPlane(A, B, C);
 
 
 

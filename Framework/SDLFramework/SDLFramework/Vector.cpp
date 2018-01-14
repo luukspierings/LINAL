@@ -118,5 +118,30 @@ Vector Vector::intersection(Vector A, Vector B, Vector C, Vector linePoint)
 	return intersection;
 }
 
+bool Vector::inPlane(Vector A, Vector B, Vector C)
+{
+	float Ax = A.values[0];
+	float Ay = A.values[1];
+
+	float Bx = B.values[0];
+	float By = B.values[1];
+
+	float Cx = C.values[0];
+	float Cy = C.values[1];
+
+	float Px = values[0];
+	float Py = values[1];
+
+	float w1a = Ax * (Cy - Ay) + ((Py - Ay) * (Cx - Ax)) - (Px * (Cy - Ay));
+	float w1b = (((By - Ay) * (Cx - Ax)) - ((Bx - Ax) * (Cy - Ay)));
+	float w1 = w1a / w1b;
+
+	float w2a = (Py - Ay - (w1 * (By - Ay)));
+	float w2b = (Cy - Ay);
+	float w2 = w2a / w2b;
+
+	return (w1 >= 0.f && w2 >= 0.f && w1 + w2 <= 1.f);
+}
+
 
 

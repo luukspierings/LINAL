@@ -35,6 +35,7 @@ public:
 
 
 	Vector intersection(Vector A, Vector B, Vector C, Vector linePoint);
+	bool inPlane(Vector A, Vector B, Vector C);
 
 
 
