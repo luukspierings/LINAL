@@ -53,7 +53,7 @@ int main(int args[])
 		
 		space.input(inputManager);
 		space.update();
-		space.draw(application);
+		space.draw();
 
 		application->EndTick();
 	}

@@ -17,7 +17,7 @@ void Polygon::drawLine(vector<float> pointA, vector<float> pointB)
 
 	if ((pointA.size() > 3 && pointA[3] < 0.f) ||
 		(pointB.size() > 3 && pointB[3] < 0.f)) {
-
-		FWApplication::GetInstance()->DrawLine(pointA[0], pointA[1], pointB[0], pointB[1]);
+		return;
 	}
+	FWApplication::GetInstance()->DrawLine(pointA[0], pointA[1], pointB[0], pointB[1]);
 }
