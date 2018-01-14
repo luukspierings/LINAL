@@ -3,6 +3,7 @@
 #include "FWApplication.h"
 #include "Vector.h"
 #include "Colors.h"
+#include "Polygon.h"
 
 #include <math.h>  
 #include <vector>
@@ -22,10 +23,8 @@ public:
 	//     (y)  [ 2
 	//     (z)  [ 4
 
-	Matrix(vector<vector<float>> v = {}, Color color = Colors::white(), vector<pair<int, int>> edges = {}) :
-		color(color), 
-		values(v),
-		edges(edges)
+	Matrix(vector<vector<float>> v = {}) :
+		values(v)
 	{}
 
 	void addValue(vector<float> value);
@@ -42,13 +41,11 @@ public:
 
 	Matrix Matrix::operator*(const Matrix & m);
 
-	// For drawing the matrix
-	vector<pair<int, int>> edges;
-	Color color;
 
-	void addEdge(int v1, int v2);
-	void draw(FWApplication* app);
-	
+	void draw();
+
+	vector<Polygon> polygons{};
+
 
 private:
 

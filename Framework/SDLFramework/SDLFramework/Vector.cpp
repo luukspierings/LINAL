@@ -18,8 +18,8 @@ Matrix Vector::getDrawableMatrix(Vector startPos) {
 		v[0].push_back(startPos.values[n]);
 		v[1].push_back(startPos.values[n] + values[n]);
 	}
-	Matrix m(v, Colors::orange());
-	m.addEdge(0, 1);
+	Matrix m(v);
+	//m.addEdge(0, 1);
 	return m;
 }
 

@@ -135,18 +135,18 @@ public:
 		app->SetColor(Colors::black());
 		app->DrawRect(0, 0, app->getW(), app->getH(), true);
 
-		camera.toDraw(planet).draw(app);
+		camera.toDraw(planet).draw();
 
 		for each(Matrix m in matrixes) {
-			camera.toDraw(m).draw(app);
+			camera.toDraw(m).draw();
 		}
 		for (auto& b : bullets) {
-			camera.toDraw(b).draw(app);
+			camera.toDraw(b).draw();
 		}
 
-		camera.toDraw(spaceship.getDrawable()).draw(app);
+		camera.toDraw(spaceship.getDrawable()).draw();
 
-		if (spaceship.isCrosshairVisible()) camera.toDraw(spaceship.getDrawableCrosshair()).draw(app);
+		if (spaceship.isCrosshairVisible()) camera.toDraw(spaceship.getDrawableCrosshair()).draw();
 		
 	}
 

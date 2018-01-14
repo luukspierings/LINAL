@@ -147,3 +147,4 @@ Matrix Camera::toDraw(Matrix m)
 	//view.fitToDimension(m.dimension()); Let de w-row stay in the matrix, so we can see if it should be drawn or not.
 	return view;
 }
+

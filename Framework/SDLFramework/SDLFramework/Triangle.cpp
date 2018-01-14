@@ -20,7 +20,7 @@ Triangle::Triangle(Vector position, int size)
 
 	addValue({ x + (size / 2), yS, z + (size / 2) });
 
-	addEdge(0, 1);
+	/*addEdge(0, 1);
 	addEdge(1, 2);
 	addEdge(2, 3);
 	addEdge(3, 0);
@@ -28,6 +28,6 @@ Triangle::Triangle(Vector position, int size)
 	addEdge(0, 4);
 	addEdge(1, 4);
 	addEdge(2, 4);
-	addEdge(3, 4);
+	addEdge(3, 4);*/
 
 }

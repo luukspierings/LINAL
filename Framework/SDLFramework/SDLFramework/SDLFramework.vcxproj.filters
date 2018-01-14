@@ -64,6 +64,9 @@
       <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="Polygon.cpp">
+      <Filter>LINAL\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="SDL2.dll" />
@@ -132,6 +135,9 @@
     </ClInclude>
     <ClInclude Include="SpaceView.h">
       <Filter>LINAL</Filter>
+    </ClInclude>
+    <ClInclude Include="Polygon.h">
+      <Filter>LINAL\Objects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

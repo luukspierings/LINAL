@@ -3,19 +3,19 @@
 #include "Matrix.h"
 
 
-void Matrix::draw(FWApplication* app) {
-
-	app->SetColor(color);
-
-	for (auto e : edges)
-	{
-		if ((values[e.first].size() > 3 && values[e.first][3] < 0.f) || (values[e.second].size() > 3 && values[e.second][3] < 0.f)) {
-			continue;
-		}
-		app->DrawLine(values[e.first][0], values[e.first][1], values[e.second][0], values[e.second][1]);
-	}
-
-}
+//void Matrix::draw(FWApplication* app) {
+//
+//	app->SetColor(color);
+//
+//	for (auto e : edges)
+//	{
+//		if ((values[e.first].size() > 3 && values[e.first][3] < 0.f) || (values[e.second].size() > 3 && values[e.second][3] < 0.f)) {
+//			continue;
+//		}
+//		app->DrawLine(values[e.first][0], values[e.first][1], values[e.second][0], values[e.second][1]);
+//	}
+//
+//}
 
 void Matrix::addValue(vector<float> value) {
 	values.push_back(value);
@@ -48,11 +48,6 @@ void Matrix::fitToDimension(int d)
 	while (dimension() > d) removeRow();
 }
 
-void Matrix::addEdge(int v1, int v2)
-{
-	edges.push_back(pair<int, int>(v1, v2));
-}
-
 Matrix Matrix::operator*(const Matrix & m)
 {
 	if (dimension() != m.amount()) return Matrix{ *this };
@@ -76,6 +71,13 @@ Matrix Matrix::operator*(const Matrix & m)
 		matrix.values.push_back(vector);
 	}
 	return matrix;
+}
+
+void Matrix::draw()
+{
+	for (auto & polygon : polygons) {
+		polygon.draw(this);
+	}
 }
 
 Vector Matrix::middlePoint() {
