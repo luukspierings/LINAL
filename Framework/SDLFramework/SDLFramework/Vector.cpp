@@ -30,8 +30,9 @@ void Vector::scale(float scalair) {
 }
 
 Vector Vector::negative() {
-	scale(-1);
-	return *this;
+	Vector negativeVector = *this;
+	negativeVector.scale(-1);
+	return negativeVector;
 }
 
 Vector Vector::normalize()

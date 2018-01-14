@@ -11,6 +11,7 @@
 #include "Colors.h"
 #include "Planet.h"
 #include "CameraModes.h"
+#include "RandomGenerator.h"
 
 #include <math.h>  
 #include <vector>
@@ -33,7 +34,7 @@ public:
 	vector<Matrix> matrixes;
 	vector<Bullet> bullets;
 	Spaceship spaceship;
-	Planet planet{ Vector({0,0,0}) };
+	Planet planet{ Vector({0, 0, 110}) };
 
 	Camera camera{ wW, wH };
 	CameraModes currentMode = CameraModes::FIRST_PERSON;
@@ -57,15 +58,19 @@ public:
 		Vector intersection = lP.intersection(A, B, C, p);
 		bool inplane = intersection.inPlane(A, B, C);
 
-
-
-
 		float sW = 5.f;
+		for (int i = 0; i < 40; i++)
+		{
+			float randomNumberX = static_cast<float>(RandomGenerator::getInstance().generate(-40, 40));
+			float randomNumberY = static_cast<float>(RandomGenerator::getInstance().generate(-40, 40));
+			float randomNumberZ = static_cast<float>(RandomGenerator::getInstance().generate(0, 100));
+			matrixes.push_back(Square(Vector({randomNumberX, randomNumberY, randomNumberZ}), sW, Color{255,0,0,255}));
+		}
 
-		matrixes.push_back(Square(Vector({ -2 * sW,sW,sW }), sW));
-		matrixes.push_back(Square(Vector({ sW,sW,0 }), sW));
+		
+		/*matrixes.push_back(Square(Vector({ sW,sW,0 }), sW));
 		matrixes.push_back(Square(Vector({ sW,-2*sW,sW }), sW));
-		matrixes.push_back(Square(Vector({ -2*sW,-2*sW,0 }), sW));
+		matrixes.push_back(Square(Vector({ -2*sW,-2*sW,0 }), sW));*/
 
 		// helping point for finding origin
 		matrixes.push_back(Line(Vector({ -originSize,0,0 }), Vector({ originSize,0,0 })));
@@ -73,7 +78,6 @@ public:
 		matrixes.push_back(Line(Vector({ 0,0,-originSize }), Vector({ 0,0,originSize })));
 	}
 	
-
 	void input(InputManager& inputM) {
 
 		if (inputM.isKeyPressed("Tab")) {
