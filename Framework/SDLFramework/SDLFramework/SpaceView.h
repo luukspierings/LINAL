@@ -54,7 +54,7 @@ public:
 		Vector B({ 2,2,1 });
 		Vector C({ 1,2,2 });
 
-		lP.intersects(A, B, C, p);
+		lP.intersection(A, B, C, p);
 
 
 
