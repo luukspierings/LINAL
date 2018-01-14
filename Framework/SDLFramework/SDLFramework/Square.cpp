@@ -26,7 +26,7 @@ Square::Square(Vector position, float size, Color color)
 	addValue({ xS,y,zS });
 
 	// back middle
-	addValue({ x + (size / 2),y+(size/2),z });
+	//addValue({ x + (size / 2),y+(size/2),z });
 
 
 	// front lines
