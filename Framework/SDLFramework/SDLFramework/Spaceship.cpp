@@ -2,7 +2,7 @@
 
 #include "Spaceship.h"
 
-#include "Space.h"
+#include "SpaceView.h"
 #include "FWApplication.h"
 
 
@@ -93,7 +93,7 @@ void Spaceship::moveDown() {
 }
 
 
-void Spaceship::input(InputManager& inputM, Space& space)
+void Spaceship::input(InputManager& inputM, SpaceView& space)
 {
 	if (inputM.isKeyDown("Left Shift")) accelerate();
 	if (inputM.isKeyDown("Q")) rollLeft();

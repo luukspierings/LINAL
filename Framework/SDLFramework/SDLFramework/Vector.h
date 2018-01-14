@@ -34,6 +34,10 @@ public:
 	bool independent(Vector vec);
 
 
+	Vector intersection(Vector A, Vector B, Vector C, Vector linePoint);
+
+
+
 	Vector Vector::operator+(const Vector & vec)
 	{
 		vector<float> v;

@@ -69,9 +69,6 @@
     <None Include="SDL2.dll" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Space.h">
-      <Filter>LINAL</Filter>
-    </ClInclude>
     <ClInclude Include="Vector.h">
       <Filter>LINAL</Filter>
     </ClInclude>
@@ -129,6 +126,12 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="CameraModes.h">
       <Filter>LINAL\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="InformationView.h">
+      <Filter>LINAL</Filter>
+    </ClInclude>
+    <ClInclude Include="SpaceView.h">
+      <Filter>LINAL</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

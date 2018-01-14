@@ -76,5 +76,47 @@ bool Vector::independent(Vector vec) {
 	return (a != 0.f && a != 180.f);
 }
 
+Vector Vector::intersection(Vector A, Vector B, Vector C, Vector linePoint)
+{
+	Vector steun = A;
+	Vector richting1 = B - A;
+	Vector richting2 = C - A;
+
+	Vector crossABC = richting1.out(richting2);
+	float inABC = crossABC.in(A);
+
+	float ABCx = crossABC.values[0];
+	float ABCy = crossABC.values[1];
+	float ABCz = crossABC.values[2];
+
+	Vector steunL = linePoint;
+	Vector richtingL = this->normalize();
+
+	// How much lambda's are in each dimension
+	float xLamount = ABCx * richtingL.values[0];
+	float yLamount = ABCy * richtingL.values[1];
+	float zLamount = ABCz * richtingL.values[2];
+
+	// What value is minus or plus the lambda in each dimension
+	float xLvalue = ABCx * steunL.values[0];
+	float yLvalue = ABCy * steunL.values[1];
+	float zLvalue = ABCz * steunL.values[2];
+
+	// What is the total value of the lambda's
+	float lambdaValue = -(xLvalue + yLvalue + zLvalue - inABC);
+
+	// How much lambda's are there
+	float lambdaAmount = xLamount + yLamount + zLamount;
+
+	// Calculate the value per lambda
+	if(lambdaAmount != 0.f) lambdaValue /= lambdaAmount;
+	else lambdaValue = 0.f;
+
+	// Fill in the formula with the value of the lambda
+	Vector intersection = steunL + Vector({ lambdaValue * richtingL.values[0], lambdaValue * richtingL.values[1], lambdaValue * richtingL.values[2] });
+
+	return intersection;
+}
+
 
 

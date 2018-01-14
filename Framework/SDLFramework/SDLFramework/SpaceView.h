@@ -21,7 +21,7 @@
 using namespace std;
 
 
-class Space {
+class SpaceView {
 
 public:
 
@@ -44,7 +44,21 @@ public:
 	};
 
 
-	Space(int wW, int wH) : wW(wW), wH(wH) {
+	SpaceView(int wW, int wH) : wW(wW), wH(wH) {
+
+
+		Vector p({ 0,1,1 });
+		Vector lP({ 1,0,0 });
+
+		Vector A({ 1,1,1 });
+		Vector B({ 2,2,1 });
+		Vector C({ 1,2,2 });
+
+		lP.intersects(A, B, C, p);
+
+
+
+
 
 		float sW = 5.f;
 

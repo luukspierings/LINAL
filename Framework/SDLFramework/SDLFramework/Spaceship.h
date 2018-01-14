@@ -12,7 +12,7 @@ using namespace std;
 #include "TranslationMatrix.h"
 
 
-class Space;
+class SpaceView;
 class Spaceship {
 
 public:
@@ -29,7 +29,7 @@ public:
 	void moveUp();
 	void moveDown();
 
-	void input(InputManager& inputM, Space& space);
+	void input(InputManager& inputM, SpaceView& space);
 
 	void update();
 
