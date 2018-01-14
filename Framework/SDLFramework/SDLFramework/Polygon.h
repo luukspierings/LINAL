@@ -5,6 +5,8 @@
 
 #include <vector>
 
+using namespace std;
+
 class Matrix;
 class Polygon {
 
