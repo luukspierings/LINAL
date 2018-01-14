@@ -165,6 +165,7 @@
     <ClInclude Include="..\SDLFramework\Line.h" />
     <ClInclude Include="..\SDLFramework\Matrix.h" />
     <ClInclude Include="..\SDLFramework\Planet.h" />
+    <ClInclude Include="..\SDLFramework\Polygon.h" />
     <ClInclude Include="..\SDLFramework\RandomGenerator.h" />
     <ClInclude Include="..\SDLFramework\RotationMatrix.h" />
     <ClInclude Include="..\SDLFramework\ScalingMatrix.h" />
@@ -185,6 +186,7 @@
     <ClCompile Include="..\SDLFramework\Line.cpp" />
     <ClCompile Include="..\SDLFramework\Matrix.cpp" />
     <ClCompile Include="..\SDLFramework\Planet.cpp" />
+    <ClCompile Include="..\SDLFramework\Polygon.cpp" />
     <ClCompile Include="..\SDLFramework\RandomGenerator.cpp" />
     <ClCompile Include="..\SDLFramework\RotationMatrix.cpp" />
     <ClCompile Include="..\SDLFramework\ScalingMatrix.cpp" />

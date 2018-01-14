@@ -59,7 +59,7 @@ public:
 		bool inplane = intersection.inPlane(A, B, C);
 
 		float sW = 5.f;
-		for (int i = 0; i < 40; i++)
+		for (int i = 0; i < 4; i++)
 		{
 			float randomNumberX = static_cast<float>(RandomGenerator::getInstance().generate(-40, 40));
 			float randomNumberY = static_cast<float>(RandomGenerator::getInstance().generate(-40, 40));
@@ -135,7 +135,8 @@ public:
 		app->SetColor(Colors::black());
 		app->DrawRect(0, 0, app->getW(), app->getH(), true);
 
-		camera.toDraw(planet).draw();
+		Matrix m = camera.toDraw(planet);
+			m.draw();
 
 		for each(Matrix m in matrixes) {
 			camera.toDraw(m).draw();
