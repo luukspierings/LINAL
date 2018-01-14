@@ -114,6 +114,7 @@
     <ClInclude Include="Colors.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="FWApplication.h" />
+    <ClInclude Include="InformationView.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Line.h" />
@@ -122,7 +123,7 @@
     <ClInclude Include="RandomGenerator.h" />
     <ClInclude Include="RotationMatrix.h" />
     <ClInclude Include="ScalingMatrix.h" />
-    <ClInclude Include="Space.h" />
+    <ClInclude Include="SpaceView.h" />
     <ClInclude Include="Spaceship.h" />
     <ClInclude Include="Square.h" />
     <ClInclude Include="TranslationMatrix.h" />

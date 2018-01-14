@@ -7,7 +7,8 @@
 #include <SDL_events.h>
 #include "SDL_timer.h"
 #include <time.h>
-#include "Space.h"
+#include "SpaceView.h"
+#include "InformationView.h"
 
 using namespace std;
 
@@ -27,7 +28,7 @@ int main(int args[])
 
 	InputManager inputManager;
 
-	Space space{ application->getW(), application->getH() };
+	SpaceView space{ application->getW(), application->getH() };
 
 
 	while (application->IsRunning())
