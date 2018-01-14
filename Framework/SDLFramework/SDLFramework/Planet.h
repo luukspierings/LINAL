@@ -12,7 +12,7 @@ using namespace std;
 class Planet: public Square {
 
 public:
-	Planet(Vector position = Vector({ 0,0,0 }), float size = 10.f) : originalSize(size), size(size), Square(position, size, Colors::green()) {};
+	Planet(Vector position = Vector({ 0,0,0 }), float size = 5.f) : originalSize(size), size(size), Square(position, size, Colors::green()) {};
 
 	void update();
 
@@ -20,9 +20,9 @@ private:
 
 	float originalSize;
 	float size;
-	float expansionStep = 0.005f;
+	float expansionStep = 0.02f;
 	float minExpansion = originalSize;
-	float maxExpansion = originalSize + 1.f;
+	float maxExpansion = originalSize + 0.5f;
 	bool expanding = true;
 
 
