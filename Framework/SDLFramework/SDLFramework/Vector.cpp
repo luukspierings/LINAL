@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Vector.h"
 #include "Matrix.h"
+#include "Polygon.h"
 
 float Vector::length() {
 	float l = 0.f;
@@ -19,7 +20,7 @@ Matrix Vector::getDrawableMatrix(Vector startPos) {
 		v[1].push_back(startPos.values[n] + values[n]);
 	}
 	Matrix m(v);
-	//m.addEdge(0, 1);
+	m.polygons.push_back(Polygon(0,0,1, Colors::orange()));
 	return m;
 }
 

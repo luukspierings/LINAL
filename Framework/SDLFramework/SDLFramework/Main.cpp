@@ -22,7 +22,7 @@ int main(int args[])
 		return EXIT_FAILURE;
 	}
 	
-	application->SetTargetFPS(60);
+	application->SetTargetFPS(30);
 	application->SetColor(Color(255, 10, 40, 255));
 
 
