@@ -9,10 +9,20 @@ void Planet::update()
 	Vector zPoint = mPoint.negative();
 
 	float scaling = (expanding) ? expansionStep : -expansionStep;
+	float scaler = 0;
+
+	if (expanding)
+	{
+		scaler = 1.f + scaling;
+	}
+	else
+	{
+		scaler = 1 / (1.f + -scaling);
+	}
 
 	TranslationMatrix translation{zPoint};
-	ScalingMatrix scalingM{ dimension(), 1.f + scaling };
 	TranslationMatrix translationM{mPoint};
+	ScalingMatrix scalingM{dimension(), scaler};
 
 	values = (translation * *this).values;
 	values = (scalingM * *this).values;
