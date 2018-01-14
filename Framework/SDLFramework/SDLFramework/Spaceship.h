@@ -57,6 +57,8 @@ public:
 
 	Vector frontMiddle();
 
+	Vector middle();
+
 private:
 
 	Matrix model;

@@ -230,6 +230,11 @@ Vector Spaceship::frontMiddle()
 	return Vector(model.values[9]);
 }
 
+Vector Spaceship::middle()
+{
+	return model.middlePoint();
+}
+
 
 
 

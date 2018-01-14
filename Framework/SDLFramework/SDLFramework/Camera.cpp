@@ -47,9 +47,9 @@ void Camera::setUp(Vector v) {
 
 void Camera::calculate()
 {
-	z = Vector((eye - lookAt).normalize());
-	y = Vector(up.normalize());
-	x = Vector(y.out(z).normalize());
+	Vector z = Vector((eye - lookAt).normalize());
+	Vector y = Vector(up.normalize());
+	Vector x = Vector(y.out(z).normalize());
 	y = z.out(x).normalize();
 
 	float xcam = x.in(eye);
@@ -81,19 +81,32 @@ void Camera::calculate()
 
 }
 
-void Camera::initiateBirdsEyeView(Vector lookat)
+void Camera::calculateArcBall(Vector lookat)
 {
-	setEye(lookAt - Vector({0,20,0,0}));
+	Matrix eyeM{ {(lookat - Vector({ 0, 0, zoom })).values} };
+	RotationMatrix yaw{ yawDegrees, Vector{{ 0, 1, 0 }}, lookat };
+	RotationMatrix pitch{ pitchDegrees, Vector{ { 1, 0, 0 } }, lookat };
+	RotationMatrix roll{ rollDegrees, Vector{{ 0, 0, 1 }} };
+
+	eyeM = yaw * eyeM;
+	eyeM = pitch * eyeM;
+
+	Matrix newUp = roll * Matrix({ { 0,1,0 } });
+	newUp.addRow(1);
+
+	setEye(Vector(eyeM.values[0]));
+	setUp(Vector(newUp.values[0]));
+	setLookat(lookat);
 }
 
-void Camera::input(InputManager & inputM)
+void Camera::inputArcBall(InputManager & inputM)
 {
-	if (inputM.isKeyDown("Left"));
-	if (inputM.isKeyDown("Right"));
-	if (inputM.isKeyDown("Up"));
-	if (inputM.isKeyDown("Down"));
-	if (inputM.isKeyDown("Right Shift"));
-	if (inputM.isKeyDown("Keypad 1"));
+	if (inputM.isKeyDown("Left")) yawDegrees -= turnSpeed;
+	if (inputM.isKeyDown("Right")) yawDegrees += turnSpeed;
+	if (inputM.isKeyDown("Up")) pitchDegrees -= turnSpeed;
+	if (inputM.isKeyDown("Down")) pitchDegrees += turnSpeed;
+	if (inputM.isKeyDown("Right Shift")) rollDegrees += turnSpeed;
+	if (inputM.isKeyDown("Keypad 1")) rollDegrees -= turnSpeed;
 }
 
 

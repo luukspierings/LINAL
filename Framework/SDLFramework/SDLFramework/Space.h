@@ -56,19 +56,16 @@ public:
 
 	void input(InputManager& inputM) {
 
-		if (inputM.isKeyPressed("Tab")) {
-			birdsEyeView = !birdsEyeView;
-			if (birdsEyeView) {
-				camera.initiateBirdsEyeView(spaceship.upMiddle());
-			}
-		}
+		if (inputM.isKeyPressed("Tab")) birdsEyeView = !birdsEyeView;
 
 		// Setting birdseye view or first/third person view
 		if (birdsEyeView) {
-			camera.setLookat(spaceship.upMiddle());
-			camera.input(inputM);
+			camera.calculateArcBall(spaceship.middle());
+			camera.inputArcBall(inputM);
 		}
-		else				spaceship.setCameraPerspective(camera);
+		else {
+			spaceship.setCameraPerspective(camera);
+		}
 
 		spaceship.input(inputM, *this);
 	}

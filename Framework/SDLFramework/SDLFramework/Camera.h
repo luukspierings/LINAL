@@ -7,6 +7,7 @@ using namespace std;
 #include "Matrix.h"
 #include "Vector.h"
 #include "InputManager.h"
+#include "RotationMatrix.h"
 
 
 class Camera {
@@ -24,8 +25,8 @@ public:
 
 	void calculate();
 
-	void initiateBirdsEyeView(Vector lookat);
-	void input(InputManager & inputM);
+	void calculateArcBall(Vector lookat);
+	void inputArcBall(InputManager & inputM);
 
 private:
 
@@ -34,19 +35,21 @@ private:
 
 	Vector eye;
 	Vector lookAt;
-
 	Vector up;
-
-	Vector z;
-	Vector y;
-	Vector x;
 
 	float near;
 	float fov;
 	float far;
 
-
 	Matrix camera;
 	Matrix projection;
+
+	// Arcball
+	float turnSpeed = 1;
+	float pitchDegrees = 0;
+	float yawDegrees = 0;
+	float rollDegrees = 0;
+	float zoom = 20;
+
 
 };
