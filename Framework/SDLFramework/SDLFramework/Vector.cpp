@@ -1,10 +1,6 @@
-
 #include "stdafx.h"
-
 #include "Vector.h"
-
 #include "Matrix.h"
-
 
 float Vector::length() {
 	float l = 0.f;
@@ -12,10 +8,6 @@ float Vector::length() {
 		l += (f*f);
 	}
 	return sqrt(l);
-}
-
-Matrix Vector::getMatrix() {
-	return Matrix({ values }, { 250,0,0,255 });
 }
 
 Matrix Vector::getDrawableMatrix(Vector startPos) {
@@ -76,7 +68,7 @@ float Vector::angle(Vector vec) {
 
 	float cosFormula = (lengthAB == 0.f) ? 0.f : in(vec) / lengthAB;
 
-	return round(RAD_TO_DEGREE * acos(cosFormula));
+	return RAD_TO_DEGREE * acos(cosFormula);
 }
 
 bool Vector::independent(Vector vec) {

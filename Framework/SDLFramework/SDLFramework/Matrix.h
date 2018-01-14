@@ -42,7 +42,6 @@ public:
 
 	Matrix Matrix::operator*(const Matrix & m);
 
-
 	// For drawing the matrix
 	vector<pair<int, int>> edges;
 	Color color;
