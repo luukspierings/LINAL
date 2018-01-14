@@ -4,6 +4,7 @@
 
 #include "SpaceView.h"
 #include "FWApplication.h"
+#include "Colors.h"
 
 
 Spaceship::Spaceship(Vector position, float size): size(size)
@@ -18,15 +19,7 @@ Spaceship::Spaceship(Vector position, float size): size(size)
 	float zS = z + size;
 
 	// corner coords
-	model.addValue({ x,y,z }); // 0: leftdown
-	model.addValue({ x,yS,z }); // 1: leftup
-	model.addValue({ xS,yS,z }); // 2: rightup
-	model.addValue({ xS,y,z }); // 3: rightdown
-
-	model.addValue({ x,y,zS });
-	model.addValue({ x,yS,zS });
-	model.addValue({ xS,yS,zS });
-	model.addValue({ xS,y,zS });
+	model = Square{ position, size, Colors::purple() };
 
 	// middle coords
 	model.addValue({ x + (size / 2), y + (size / 2), z }); // 8: back middle
@@ -37,25 +30,6 @@ Spaceship::Spaceship(Vector position, float size): size(size)
 
 	model.addValue({ x + (size / 2), yS, z + (size / 2) }); // 12: up middle
 	model.addValue({ x + (size / 2), y, z + (size / 2) }); // 13: down middle
-
-	// front lines
-	model.addEdge(0, 1);
-	model.addEdge(1, 2);
-	model.addEdge(2, 3);
-	model.addEdge(3, 0);
-
-	// back lines
-	model.addEdge(4, 5);
-	model.addEdge(5, 6);
-	model.addEdge(6, 7);
-	model.addEdge(7, 4);
-
-	// lines between front and back
-	model.addEdge(0, 4);
-	model.addEdge(1, 5);
-	model.addEdge(2, 6);
-	model.addEdge(3, 7);
-
 
 	aabb = Square{ position, size };
 }

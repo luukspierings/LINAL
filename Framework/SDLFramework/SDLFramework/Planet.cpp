@@ -9,7 +9,7 @@ void Planet::update()
 	float scaling = (expanding) ? expansionStep : -expansionStep;
 
 	ScalingMatrix scalingM{ dimension(), 1.f + scaling };
-	TranslationMatrix translationM{ dimension(), -(scaling) };
+	TranslationMatrix translationM{ dimension(), -(scaling*2) };
 
 	values = (scalingM * *this).values;
 	values = (translationM * *this).values;
