@@ -80,6 +80,14 @@ void Matrix::draw()
 	}
 }
 
+bool Matrix::collidesWith(Vector point, Vector direction)
+{
+	for (auto & polygon : polygons) {
+		if(polygon.collidesWith(this, point, direction)) return true;
+	}
+	return false;
+}
+
 Vector Matrix::middlePoint() {
 
 	vector<float> middle;
