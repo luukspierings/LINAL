@@ -129,11 +129,11 @@ public:
 		bullets.push_back(Bullet{pos, dir, relativeVelocity});
 	}
 
-	void draw(FWApplication* app)
+	void draw()
 	{
 		// Background
-		app->SetColor(Colors::black());
-		app->DrawRect(0, 0, app->getW(), app->getH(), true);
+		FWApplication::GetInstance()->SetColor(Colors::black());
+		FWApplication::GetInstance()->DrawRect(0, 0, wW, wH, true);
 
 		Matrix m = camera.toDraw(planet);
 			m.draw();
@@ -145,7 +145,8 @@ public:
 			camera.toDraw(b).draw();
 		}
 
-		camera.toDraw(spaceship.getDrawable()).draw();
+		Matrix sp = camera.toDraw(spaceship.getDrawable());
+			sp.draw();
 
 		if (spaceship.isCrosshairVisible()) camera.toDraw(spaceship.getDrawableCrosshair()).draw();
 		
