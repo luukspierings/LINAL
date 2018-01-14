@@ -12,7 +12,7 @@ Camera::Camera(float pWW, float pWH)
 
 	eye = Vector({ 0,0,0,1 });
 	lookAt = Vector({ 0,0,1,1 });
-	up = Vector({ 0,1,0,1 });
+	up = Vector({ 0,-1,0,1 });
 
 	near = 10.f;
 	fov = 110.f;
@@ -107,6 +107,23 @@ void Camera::inputArcBall(InputManager & inputM)
 	if (inputM.isKeyDown("Down")) pitchDegrees += turnSpeed;
 	if (inputM.isKeyDown("Right Shift")) rollDegrees += turnSpeed;
 	if (inputM.isKeyDown("Keypad 1")) rollDegrees -= turnSpeed;
+}
+
+void Camera::calculateBirdsEye()
+{
+	setEye(Vector { { bevX, bevY, bevZ } });
+	setLookat(eye + Vector({ 0,1,0 }));
+	setUp(Vector{ {0,0,-1,1} });
+}
+
+void Camera::inputBirdsEye(InputManager & inputM)
+{
+	if (inputM.isKeyDown("Left")) bevX += moveSpeed;
+	if (inputM.isKeyDown("Right")) bevX -= moveSpeed;
+	if (inputM.isKeyDown("Up")) bevZ += moveSpeed;
+	if (inputM.isKeyDown("Down")) bevZ -= moveSpeed;
+	if (inputM.isKeyDown("PageUp")) bevY -= moveSpeed;
+	if (inputM.isKeyDown("PageDown")) bevY += moveSpeed;
 }
 
 

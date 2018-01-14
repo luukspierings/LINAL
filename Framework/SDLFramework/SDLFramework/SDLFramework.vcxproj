@@ -110,6 +110,7 @@
   <ItemGroup>
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="CameraModes.h" />
     <ClInclude Include="Colors.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="FWApplication.h" />

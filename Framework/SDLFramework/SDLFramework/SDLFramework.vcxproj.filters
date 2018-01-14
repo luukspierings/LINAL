@@ -127,5 +127,8 @@
       <Filter>LINAL\Matrices</Filter>
     </ClInclude>
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="CameraModes.h">
+      <Filter>LINAL\Objects</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -10,6 +10,7 @@
 #include "Bullet.h"
 #include "Colors.h"
 #include "Planet.h"
+#include "CameraModes.h"
 
 #include <math.h>  
 #include <vector>
@@ -35,7 +36,12 @@ public:
 	Planet planet{ Vector({0,0,0}) };
 
 	Camera camera{ wW, wH };
-	bool birdsEyeView = false;
+	CameraModes currentMode = CameraModes::FIRST_PERSON;
+	vector<CameraModes> availableCameraModes{
+		CameraModes::FIRST_PERSON,
+		CameraModes::ARCBALL,
+		CameraModes::BIRDS_EYE
+	};
 
 
 	Space(int wW, int wH) : wW(wW), wH(wH) {
@@ -56,15 +62,26 @@ public:
 
 	void input(InputManager& inputM) {
 
-		if (inputM.isKeyPressed("Tab")) birdsEyeView = !birdsEyeView;
-
-		// Setting birdseye view or first/third person view
-		if (birdsEyeView) {
-			camera.calculateArcBall(spaceship.middle());
-			camera.inputArcBall(inputM);
+		if (inputM.isKeyPressed("Tab")) {
+			auto f = find(availableCameraModes.begin(), availableCameraModes.end(), currentMode);
+			f++;
+			if (f == availableCameraModes.end()) f = availableCameraModes.begin();
+			currentMode = *f;
 		}
-		else {
+
+		switch (currentMode)
+		{
+		case CameraModes::FIRST_PERSON: 
 			spaceship.setCameraPerspective(camera);
+			break;
+		case CameraModes::ARCBALL:
+			camera.inputArcBall(inputM);
+			camera.calculateArcBall(spaceship.middle());
+			break;
+		case CameraModes::BIRDS_EYE:
+			camera.inputBirdsEye(inputM);
+			camera.calculateBirdsEye();
+			break;
 		}
 
 		spaceship.input(inputM, *this);

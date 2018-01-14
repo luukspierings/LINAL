@@ -67,11 +67,11 @@ void Spaceship::accelerate()
 
 void Spaceship::rollLeft() {
 	Vector v{ backMiddle() - frontMiddle() };
-	model = RotationMatrix(turnDegrees, v.normalize(), model.middlePoint()) * model;
+	model = RotationMatrix(-turnDegrees, v.normalize(), model.middlePoint()) * model;
 }
 void Spaceship::rollRight() {
 	Vector v{ backMiddle() - frontMiddle() };
-	model = RotationMatrix(-turnDegrees, v.normalize(), model.middlePoint()) * model;
+	model = RotationMatrix(turnDegrees, v.normalize(), model.middlePoint()) * model;
 }
 
 void Spaceship::moveLeft() {
@@ -85,11 +85,11 @@ void Spaceship::moveRight() {
 
 void Spaceship::moveUp() {
 	Vector v{ leftMiddle() - rightMiddle() };
-	model = RotationMatrix(turnDegrees, v.normalize(), model.middlePoint()) * model;
+	model = RotationMatrix(-turnDegrees, v.normalize(), model.middlePoint()) * model;
 }
 void Spaceship::moveDown() {
 	Vector v{ leftMiddle() - rightMiddle() };
-	model = RotationMatrix(-turnDegrees, v.normalize(), model.middlePoint()) * model;
+	model = RotationMatrix(turnDegrees, v.normalize(), model.middlePoint()) * model;
 }
 
 

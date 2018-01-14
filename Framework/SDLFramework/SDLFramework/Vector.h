@@ -37,7 +37,7 @@ public:
 	Vector Vector::operator+(const Vector & vec)
 	{
 		vector<float> v;
-		for (float i = 0; i < values.size() || i < vec.values.size(); i++) {
+		for (float i = 0; i < values.size() && i < vec.values.size(); i++) {
 			v.push_back(values[i] + vec.values[i]);
 		}
 		return Vector(v);
@@ -45,7 +45,7 @@ public:
 	Vector Vector::operator-(const Vector & vec)
 	{
 		vector<float> v;
-		for (float i = 0; i < values.size() || i < vec.values.size(); i++) {
+		for (float i = 0; i < values.size() && i < vec.values.size(); i++) {
 			v.push_back(values[i] - vec.values[i]);
 		}
 		return Vector(v);

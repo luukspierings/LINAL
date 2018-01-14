@@ -28,6 +28,9 @@ public:
 	void calculateArcBall(Vector lookat);
 	void inputArcBall(InputManager & inputM);
 
+	void calculateBirdsEye();
+	void inputBirdsEye(InputManager & inputM);
+
 private:
 
 	float wW;
@@ -44,12 +47,16 @@ private:
 	Matrix camera;
 	Matrix projection;
 
-	// Arcball
+	// ArcBall
 	float turnSpeed = 1;
 	float pitchDegrees = 0;
 	float yawDegrees = 0;
 	float rollDegrees = 0;
 	float zoom = 20;
 
-
+	// BirdsEye
+	float bevX = 0;
+	float bevY = -50;
+	float bevZ = 0;
+	float moveSpeed = 1;
 };
