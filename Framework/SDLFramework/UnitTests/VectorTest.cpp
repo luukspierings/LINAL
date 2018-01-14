@@ -84,5 +84,51 @@ namespace UnitTests
 			Assert::AreEqual(out.values[1], 25.f);
 			Assert::AreEqual(out.values[2], 0.f);
 		}
+
+		TEST_METHOD(Vector_Intersection_True)
+		{
+			Vector p({0,1,1});
+			Vector lP({1,0,0});
+
+			Vector A({1,1,1});
+			Vector B({2,2,1});
+			Vector C({1,2,2});
+
+			Vector intersection = lP.intersection(A, B, C, p);
+			Assert::AreEqual(intersection.values[0], 1.f);
+			Assert::AreEqual(intersection.values[1], 1.f);
+			Assert::AreEqual(intersection.values[2], 1.f);
+			
+		}
+
+		TEST_METHOD(Vector_InPlane_True)
+		{
+			Vector p({0,1,1});
+			Vector lP({1,0,0});
+
+			Vector A({1,1,1});
+			Vector B({2,2,1});
+			Vector C({1,2,2});
+
+			Vector intersection = lP.intersection(A, B, C, p);
+			bool inplane = intersection.inPlane(A, B, C);
+
+			Assert::AreEqual(inplane, true);
+		}
+
+		TEST_METHOD(Vector_InPlane_False)
+		{
+			Vector p({0,1,1});
+			Vector lP({-5,-9,-50});
+
+			Vector A({1,1,1});
+			Vector B({2,2,1});
+			Vector C({1,2,2});
+
+			Vector intersection = lP.intersection(A, B, C, p);
+			bool inplane = intersection.inPlane(A, B, C);
+			
+			Assert::AreEqual(inplane, false);
+		}
 	};
 }
