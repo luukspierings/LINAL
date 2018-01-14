@@ -59,7 +59,7 @@ public:
 		bool inplane = intersection.inPlane(A, B, C);
 
 		float sW = 5.f;
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i < 20; i++)
 		{
 			float randomNumberX = static_cast<float>(RandomGenerator::getInstance().generate(-40, 40));
 			float randomNumberY = static_cast<float>(RandomGenerator::getInstance().generate(-40, 40));
