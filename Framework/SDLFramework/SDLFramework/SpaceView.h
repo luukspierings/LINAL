@@ -104,7 +104,7 @@ public:
 
 		for (auto& b : bullets) {
 			b.update();
-			if (planet.collidesWith(b.middlePoint(), b.direction)) {
+			if (b.collidesWith(&planet)) {
 				gameover = true;
 			}
 		}
@@ -130,8 +130,7 @@ public:
 		FWApplication::GetInstance()->SetColor(Colors::black());
 		FWApplication::GetInstance()->DrawRect(0, 0, wW, wH, true);
 
-		Matrix m = camera.toDraw(planet);
-			m.draw();
+		camera.toDraw(planet).draw();
 
 		for each(Matrix m in matrixes) {
 			camera.toDraw(m).draw();
@@ -140,8 +139,7 @@ public:
 			camera.toDraw(b).draw();
 		}
 
-		Matrix sp = camera.toDraw(spaceship.getDrawable());
-			sp.draw();
+		camera.toDraw(spaceship.getDrawable()).draw();
 
 		if (spaceship.isCrosshairVisible()) camera.toDraw(spaceship.getDrawableCrosshair()).draw();
 		

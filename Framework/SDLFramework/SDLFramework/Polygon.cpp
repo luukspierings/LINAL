@@ -30,3 +30,12 @@ bool Polygon::collidesWith(Matrix* object, Vector point, Vector direction)
 
 	return direction.intersection(a, b, c, point).inPlane(a, b, c);
 }
+
+Vector Polygon::collisionIntersection(Matrix * object, Vector point, Vector direction)
+{
+	Vector a(object->values[A]);
+	Vector b(object->values[B]);
+	Vector c(object->values[C]);
+
+	return direction.intersection(a, b, c, point);
+}

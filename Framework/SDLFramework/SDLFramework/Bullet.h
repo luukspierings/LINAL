@@ -30,7 +30,7 @@ public:
 	}
 
 	Vector direction;
-
+	bool collidesWith(Matrix* col);
 
 private:
 
@@ -40,6 +40,11 @@ private:
 
 	float velocity = 10.f;
 	float relativeVelocity = 0.f;
+
+	Matrix* closestCollision = nullptr;
+	Polygon* closestPolygon = nullptr;
+	float lastCollisionDistance = 0.f;
+
 
 
 };

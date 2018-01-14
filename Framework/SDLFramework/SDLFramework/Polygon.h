@@ -33,4 +33,5 @@ public:
 	bool visibleBC = true;
 
 	bool collidesWith(Matrix* object, Vector point, Vector direction);
+	Vector collisionIntersection(Matrix* object, Vector point, Vector direction);
 };
