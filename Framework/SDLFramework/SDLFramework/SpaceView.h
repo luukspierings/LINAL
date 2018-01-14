@@ -44,6 +44,8 @@ public:
 		CameraModes::BIRDS_EYE
 	};
 
+	int collisionTimer = 0;
+	int collisionTimerMax = 20;
 
 	SpaceView(int wW, int wH) : wW(wW), wH(wH) {
 
@@ -116,9 +118,20 @@ public:
 
 		for (auto it = bullets.begin(); it != bullets.end();)
 		{
+			if (collisionTimer == collisionTimerMax) {
+				for (auto mat = matrixes.begin(); mat != matrixes.end();) {
+					if (mat->collidesWith(it->middlePoint(), it->direction)) {
+						mat = matrixes.erase(mat);
+					}
+					else ++mat;
+				}
+			}
+
 			if (!it->alive()) it = bullets.erase(it);
 			else ++it;
 		}
+		if (collisionTimer == collisionTimerMax) collisionTimer = 0;
+		else collisionTimer++;
 
 	}
 

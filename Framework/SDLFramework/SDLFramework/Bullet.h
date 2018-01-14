@@ -29,16 +29,18 @@ public:
 		return (lifetime > 0.f);
 	}
 
+	Vector direction;
+
+
 private:
 
 	float lifetime = 500.f;
 
 	float size = 0.1f;
 
-	float velocity = 1.f;
+	float velocity = 10.f;
 	float relativeVelocity = 0.f;
 
-	Vector direction;
 
 };
 

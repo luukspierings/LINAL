@@ -21,3 +21,12 @@ void Polygon::drawLine(vector<float> pointA, vector<float> pointB)
 	}
 	FWApplication::GetInstance()->DrawLine(pointA[0], pointA[1], pointB[0], pointB[1]);
 }
+
+bool Polygon::collidesWith(Matrix* object, Vector point, Vector direction)
+{
+	Vector a(object->values[A]);
+	Vector b(object->values[B]);
+	Vector c(object->values[C]);
+
+	return direction.intersection(a, b, c, point).inPlane(a, b, c);
+}

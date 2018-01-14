@@ -44,6 +44,8 @@ public:
 
 	void draw();
 
+	bool collidesWith(Vector point, Vector direction);
+
 	vector<Polygon> polygons{};
 
 

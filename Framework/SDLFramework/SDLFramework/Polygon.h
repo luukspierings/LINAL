@@ -2,6 +2,7 @@
 
 #include "FWApplication.h"
 #include "Colors.h"
+#include "Vector.h"
 
 #include <vector>
 
@@ -31,4 +32,5 @@ public:
 	bool visibleAC = true;
 	bool visibleBC = true;
 
+	bool collidesWith(Matrix* object, Vector point, Vector direction);
 };
