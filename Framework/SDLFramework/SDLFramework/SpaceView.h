@@ -102,6 +102,7 @@ public:
 		planet.update();
 		spaceship.update();
 
+		gameover = false;
 		for (auto& b : bullets) {
 			b.update();
 			if (planet.collidesWith(b.middlePoint(), b.direction)) {
@@ -129,6 +130,12 @@ public:
 		// Background
 		FWApplication::GetInstance()->SetColor(Colors::black());
 		FWApplication::GetInstance()->DrawRect(0, 0, wW, wH, true);
+
+		if (gameover) {
+			FWApplication::GetInstance()->SetColor(Colors::white());
+			FWApplication::GetInstance()->DrawText("Bullet intersection with planet", 100, 20);
+		}
+
 
 		Matrix m = camera.toDraw(planet);
 			m.draw();

@@ -34,7 +34,7 @@ public:
 
 private:
 
-	float lifetime = 500.f;
+	float lifetime = 12.f;
 
 	float size = 0.1f;
 
